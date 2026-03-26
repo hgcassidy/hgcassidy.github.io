@@ -3,187 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harvy Cassidy — Especialista en Sistemas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Harvy Cassidy — Especialista en Sistemas e Infraestructura IT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Mantenemos tus colores originales tal cual */
         :root {
             --bg: #0a0f16;
             --bg2: #111827;
             --panel: #1f2937;
-            --accent: #22d3ee; /* Tu cyan brillante */
-            --accent2: #4f8fff;
+            --accent: #22d3ee;
             --text: #ffffff;
-            --heading: #ffffff;
+            --text-dim: #94a3b8;
             --border: rgba(255,255,255,0.05);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            display: flex;
-        }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; display: flex; scroll-behavior: smooth; }
 
-        /* SIDEBAR - Mantenemos la estructura de tu diseño */
-        .sidebar {
-            width: 300px;
-            background-color: var(--bg2);
-            padding: 40px;
-            height: 100vh;
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-right: 1px solid var(--border);
-        }
+        /* SIDEBAR */
+        .sidebar { width: 320px; background-color: var(--bg2); padding: 40px 20px; height: 100vh; position: fixed; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--border); overflow-y: auto; }
+        .profile-pic { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 20px; }
+        .name { font-size: 20px; font-weight: 700; text-align: center; color: var(--text); }
+        .sidebar-subtitle { color: var(--accent); font-size: 12px; margin: 8px 0 25px; text-align: center; font-weight: 500; }
+        .nav-links { list-style: none; width: 100%; margin-bottom: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 13px; display: block; padding: 12px 15px; border-radius: 8px; transition: 0.3s; }
+        .nav-links a:hover { background-color: var(--panel); color: var(--accent); transform: translateX(5px); }
 
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--panel);
-            margin-bottom: 20px;
-        }
+        /* MAIN CONTENT */
+        .main-content { margin-left: 320px; padding: 50px 80px; width: calc(100% - 320px); max-width: 1300px; }
+        section { margin-bottom: 70px; }
+        h2 { font-size: 24px; color: var(--accent); margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-weight: 600; }
+        h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        h3 { font-size: 18px; color: #fff; margin: 20px 0 15px; border-left: 3px solid var(--accent); padding-left: 10px; }
+        p { font-size: 15px; line-height: 1.7; color: var(--text-dim); margin-bottom: 15px; }
 
-        .name { font-size: 24px; font-weight: 700; text-align: center; }
-        .title { color: var(--accent); font-size: 14px; margin-bottom: 30px; text-align: center; }
+        /* METRIC CARDS */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px; }
+        .metric-card { background: var(--panel); padding: 20px; border-radius: 12px; border: 1px solid var(--border); text-align: center; transition: 0.3s; }
+        .metric-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .metric-val { display: block; font-size: 26px; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+        .metric-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px; }
 
-        .nav-links { list-style: none; width: 100%; }
-        .nav-links li { margin-bottom: 15px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 16px;
-            display: block;
-            padding: 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        .nav-links a:hover { background-color: var(--panel); color: var(--accent); }
+        /* SKILLS TAGS */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .skill-box { background: var(--bg2); padding: 20px; border-radius: 10px; border: 1px solid var(--border); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tag { background: rgba(34, 211, 238, 0.05); color: #cfd8dc; padding: 4px 10px; border-radius: 4px; font-size: 12px; border: 1px solid rgba(255,255,255,0.1); transition: 0.2s; }
+        .tag:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* MAIN CONTENT - Aquí integramos tu info real */
-        .main-content {
-            margin-left: 300px;
-            padding: 60px;
-            width: calc(100% - 300px);
-        }
+        /* PROJECTS */
+        .project-card { background: var(--panel); padding: 30px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 25px; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 15px; }
+        .detail-item h4 { font-size: 13px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+        .detail-item ul { list-style: none; font-size: 13px; color: var(--text-dim); }
+        .detail-item li { margin-bottom: 6px; position: relative; padding-left: 18px; }
+        .detail-item li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-        section { margin-bottom: 60px; }
-        h1 { font-size: 40px; margin-bottom: 10px; }
-        h2 { font-size: 24px; color: var(--accent); margin-bottom: 30px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px;}
-        p { font-size: 16px; line-height: 1.8; margin-bottom: 20px; color: #d1d5db; }
+        /* FOOTER / CONTACT */
+        .status { font-size: 12px; background: rgba(34, 211, 238, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; display: inline-block; }
+        .btn-group { display: flex; flex-direction: column; width: 100%; gap: 10px; }
+        .btn { padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 13px; text-align: center; transition: 0.3s; }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-secondary { border: 1px solid var(--accent); color: var(--accent); }
 
-        /* Integramos tu stack técnico como tarjetas */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-item {
-            background-color: var(--panel);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .skill-item h3 { color: #ffffff; margin-bottom: 10px; font-size: 18px;}
-        .skill-item p { font-size: 14px; margin-bottom: 0;}
-
-        /* Integramos tus proyectos */
-        .project-item {
-            background-color: var(--panel);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-        }
-        .project-item h3 { color: var(--accent); margin-bottom: 10px; }
-        .project-item h4 { color: #ffffff; margin-bottom: 5px; font-size: 16px;}
-        .project-item ul { list-style: none; margin-bottom: 15px;}
-        .project-item li { font-size: 14px; color: #d1d5db; margin-bottom: 5px; position: relative; padding-left: 15px;}
-        .project-item li::before { content: "›"; position: absolute; left: 0; color: var(--accent); }
-
-        /* Botón de contacto */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--accent);
-            color: var(--bg);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 20px;
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
+            .main-content { margin-left: 0; width: 100%; padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <aside class="sidebar">
         <img src="profile.jpg" alt="Harvy Cassidy" class="profile-pic">
+        <div class="status">🟢 Abierto a oportunidades | España</div>
         <div class="name">Harvy Cassidy</div>
-        <div class="title">Especialista en Sistemas</div>
+        <div class="sidebar-subtitle">ESPECIALISTA EN ADMINISTRACIÓN DE SISTEMAS EN RED</div>
+        
         <ul class="nav-links">
-            <li><a href="#about">Sobre Mí</a></li>
-            <li><a href="#skills">Especialización</a></li>
-            <li><a href="#projects">Proyectos</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#about">🧠 Propuesta de Valor</a></li>
+            <li><a href="#impact">🚀 Impacto en Negocio</a></li>
+            <li><a href="#skills">🧩 Especialización Técnica</a></li>
+            <li><a href="#projects">🏗️ Proyectos Estratégicos</a></li>
+            <li><a href="#method">🏗️ Metodología TI</a></li>
+            <li><a href="#education">🎓 Formación</a></li>
         </ul>
-    </div>
-    <div class="main-content">
+
+        <div class="btn-group">
+            <a href="mailto:hgcassidy@gmail.com" class="btn btn-primary">hgcassidy@gmail.com</a>
+            <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
         <section id="about">
-            <h1>Hola, Soy Harvy Cassidy</h1>
-            <p>Administrador de Sistemas Informáticos en Red especializado en infraestructuras on-premise e híbridas. Experto en la optimización operativa mediante la automatización de procesos con PowerShell, Bash y Power Automate.</p>
-            <p>Gracias a mi formación en gestión de proyectos (PM2) y de servicios (ITIL), aporto una visión integral en la planificación, ejecución y seguridad de entornos TI.</p>
+            <h2>Propuesta de Valor</h2>
+            <p>Especialista en infraestructuras on-premise e híbridas (Microsoft/Linux) y virtualización (VMware/Hyper-V). Experto en la optimización operativa mediante la automatización de procesos con PowerShell, Bash y Power Automate.</p>
+            <p>Gracias a mi formación en gestión de proyectos (PM2) y de servicios (ITIL), aporto una visión integral en la planificación, ejecución y seguridad de entornos TI. Perfil autodidacta y resolutivo, orientado a la mejora continua y a la integración de la IA para maximizar la eficiencia tecnológica.</p>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <div class="skill-tags">
+                        <span class="tag">⚙️ Automatización</span><span class="tag">🔐 Seguridad</span>
+                        <span class="tag">📊 Optimización</span><span class="tag">📋 Gestión Agile/PM2</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact">
+            <h2>Impacto Real en Negocio</h2>
+            <div class="metrics-grid">
+                <div class="metric-card"><span class="metric-val">>99.9%</span><span class="metric-label">Uptime Crítico</span></div>
+                <div class="metric-card"><span class="metric-val">>70%</span><span class="metric-label">Reducción Manual</span></div>
+                <div class="metric-card"><span class="metric-val">60%</span><span class="metric-label">↓ Tiempo Respuesta</span></div>
+                <div class="metric-card"><span class="metric-val">40%</span><span class="metric-label">↓ MTTD (Monit.)</span></div>
+                <div class="metric-card"><span class="metric-val">20%</span><span class="metric-label">Capacidad Liberada</span></div>
+            </div>
+            <p style="margin-top: 20px;">Liderazgo de equipo técnico de <strong>7 especialistas</strong>.</p>
         </section>
 
         <section id="skills">
             <h2>Especialización Técnica</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <h3>Sistemas Operativos</h3>
-                    <p>Windows Server, Linux (Ubuntu)</p>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>Sistemas e Identidad</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Windows Server</span><span class="tag">Ubuntu</span><span class="tag">Active Directory</span><span class="tag">ADFS</span><span class="tag">GPOs</span><span class="tag">IIS</span><span class="tag">FTP</span><span class="tag">WSUS</span>
+                    </div>
                 </div>
-                <div class="skill-item">
+                <div class="skill-box">
+                    <h3>Virtualización y HA</h3>
+                    <div class="skill-tags">
+                        <span class="tag">VMware</span><span class="tag">Hyper-V</span><span class="tag">Failover Clustering</span><span class="tag">On-premise</span><span class="tag">Híbrido</span><span class="tag">RemoteApp</span>
+                    </div>
+                </div>
+                <div class="skill-box">
                     <h3>Redes y Seguridad</h3>
-                    <p>VLANs, VPNs, Firewalls, Hardening, Active Directory, GPOs.</p>
+                    <div class="skill-tags">
+                        <span class="tag">VLANs</span><span class="tag">VPNs</span><span class="tag">Firewalls</span><span class="tag">Hardening</span><span class="tag">SSH</span><span class="tag">DNS/DHCP</span><span class="tag">Routing/Switching</span>
+                    </div>
                 </div>
-                <div class="skill-item">
-                    <h3>Virtualización</h3>
-                    <p>VMware, Hyper-V, Entornos on-premise e híbridos.</p>
+                <div class="skill-box">
+                    <h3>Monitorización y DB</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Grafana</span><span class="tag">Check_MK</span><span class="tag">Power BI</span><span class="tag">SQL Server</span><span class="tag">MySQL</span><span class="tag">MariaDB</span>
+                    </div>
                 </div>
-                <div class="skill-item">
-                    <h3>Automatización</h3>
-                    <p>PowerShell, Bash, Power Automate.</p>
+                <div class="skill-box">
+                    <h3>Gestión de Servicios y SAP</h3>
+                    <div class="skill-tags">
+                        <span class="tag">ServiceNow</span><span class="tag">GLPI</span><span class="tag">MS Dynamics</span><span class="tag">SAP Basis (User/Roles/Transp)</span><span class="tag">Certificados SAP</span>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <h3>Almacenamiento y SAN</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Dell EMC (SAN)</span><span class="tag">TrueNAS</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="projects">
             <h2>Proyectos Estratégicos</h2>
-            <div class="project-item">
-                <h3>Migración y Modernización</h3>
-                <h4>Acción</h4>
-                <ul>
-                    <li>Virtualización del ERP SAP en entorno productivo.</li>
-                    <li>Migración de firewalls FortiGate sin interrupciones.</li>
-                </ul>
-                <h4>Resultado</h4>
-                <ul>
-                    <li>Continuidad operativa sin impacto en negocio.</li>
-                    <li>Mejora significativa en seguridad perimetral.</li>
-                </ul>
+            <div class="project-card">
+                <h3>Migración de Infraestructura Crítica</h3>
+                <div class="project-grid">
+                    <div class="detail-item">
+                        <h4>Acción</h4>
+                        <ul>
+                            <li>Virtualización SAP productivo.</li>
+                            <li>Migración FortiGate zero-downtime.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Resultado</h4>
+                        <ul>
+                            <li>Continuidad operativa 100%.</li>
+                            <li>Reducción superficie ataque.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3>Monitorización y Respuesta</h3>
+                <div class="project-grid">
+                    <div class="detail-item">
+                        <h4>Acción</h4>
+                        <ul>
+                            <li>Dashboards Grafana y alertas proactivas.</li>
+                            <li>Seguimiento mediante KPIs y SLAs.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Resultado</h4>
+                        <ul>
+                            <li>Uptime del 99.9% mantenido.</li>
+                            <li>Reducción del MTTD en un 40%.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
-        
-        <section id="contact">
-            <h2>Contacto</h2>
-            <p>Estoy abierto a nuevas oportunidades en Administración de Sistemas, Infraestructura IT y Automatización.</p>
-            <a href="mailto:hgcassidy@gmail.com" class="btn">Enviar Correo</a>
+
+        <section id="method">
+            <h2>Metodología y Gobernanza TI</h2>
+            <p>Aplicación de <strong>metodologías ágiles (Scrum/Kanban)</strong> y <strong>PM2 Essentials</strong>. Especialista en la creación de activos mediante la documentación técnica y estandarización de procesos.</p>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <p>Cultura <strong>Data-Driven</strong>: Seguimiento de SLAs y reporte ejecutivo de bloqueos mediante Grafana/Power BI.</p>
+                </div>
+            </div>
         </section>
-    </div>
+
+        <section id="education">
+            <h2>Formación y Certificaciones</h2>
+            <div class="skill-tags">
+                <span class="tag">ASIR (Sistemas en Red)</span><span class="tag">PM2 Essentials</span><span class="tag">IA Generativa (TecnoFor)</span><span class="tag">Apollo 13 (Crisis Management)</span><span class="tag">MCP ID: 3357452</span><span class="tag">Inglés: B2</span>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
