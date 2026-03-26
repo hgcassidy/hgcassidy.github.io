@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Harvy Cassidy - Especialista en Administración de Sistemas en Red. Infraestructura IT, Seguridad, Automatización PowerShell, VMware, Active Directory, Linux.">
-    <meta name="keywords" content="Administrador Sistemas, Infraestructura IT, PowerShell, VMware, Active Directory, Linux, Automatización, Seguridad Redes, DevOps, SRE">
+    <meta name="keywords" content="Administrador Sistemas, Infraestructura IT, PowerShell, VMware, Active Directory, Linux, Automatización, Seguridad Redes, DevOps, SRE, ITIL, PM2">
     <meta name="author" content="Harvy Cassidy">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Harvy Cassidy — Especialista en Sistemas e Infraestructura IT">
@@ -41,7 +41,7 @@
             color: var(--text); 
             font-family: 'Poppins', sans-serif; 
             display: flex; 
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
@@ -49,7 +49,6 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
         @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes glow { 0%, 100% { box-shadow: 0 0 5px rgba(34, 211, 238, 0.3); } 50% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.6); } }
 
         /* SIDEBAR */
         .sidebar { 
@@ -264,7 +263,7 @@
         }
 
         h3 { 
-            font-size: 18px; 
+            font-size: 17px; 
             color: var(--text); 
             margin: 25px 0 15px; 
             border-left: 4px solid var(--accent); 
@@ -277,7 +276,6 @@
             line-height: 1.8; 
             color: var(--text-dim); 
             margin-bottom: 18px;
-            text-align: justify;
         }
 
         .highlight { color: var(--accent); font-weight: 600; }
@@ -285,7 +283,7 @@
         /* METRIC CARDS */
         .metrics-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+            grid-template-columns: repeat(3, 1fr); 
             gap: 20px; 
             margin-top: 30px; 
         }
@@ -339,10 +337,88 @@
             display: block;
         }
 
+        .metric-context {
+            display: block;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Impact Section Specific */
+        .impact-intro {
+            font-size: 15px;
+            color: var(--text-dim);
+            margin-bottom: 35px;
+            padding: 20px 25px;
+            background: rgba(34, 211, 238, 0.05);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .impact-summary {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(145deg, var(--bg2) 0%, var(--bg3) 100%);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        .impact-summary h3 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: var(--text);
+            border: none;
+            padding: 0;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .impact-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            padding: 20px;
+            background: var(--panel);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .impact-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+        }
+
+        .impact-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .impact-item strong {
+            display: block;
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .impact-item p {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin: 0;
+            line-height: 1.5;
+        }
+
         /* SKILLS TAGS */
         .skills-container { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 25px; 
         }
 
@@ -433,20 +509,21 @@
 
         .project-problem h4 {
             color: #ef4444;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .project-problem p {
-            font-size: 14px;
+            font-size: 13px;
             margin: 0;
             color: var(--text-dim);
         }
 
         .project-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 30px; 
             margin-top: 20px; 
         }
@@ -459,6 +536,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         .detail-item ul { 
@@ -493,9 +571,10 @@
 
         .project-results h4 {
             color: var(--accent);
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .result-badges {
@@ -509,7 +588,7 @@
             color: var(--accent);
             padding: 8px 14px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             border: 1px solid rgba(34, 211, 238, 0.3);
         }
@@ -517,7 +596,7 @@
         /* METHODOLOGY */
         .method-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-top: 25px;
         }
@@ -537,16 +616,18 @@
 
         .method-card h4 {
             color: var(--accent);
-            font-size: 15px;
+            font-size: 14px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         .method-card p {
-            font-size: 14px;
+            font-size: 13px;
             margin: 0;
+            line-height: 1.6;
         }
 
         /* EDUCATION */
@@ -573,14 +654,14 @@
         }
 
         .education-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--accent-gradient);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
@@ -637,19 +718,23 @@
             }
             .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
             .nav-links a { padding: 10px 15px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-container { grid-template-columns: 1fr; }
+            .method-grid { grid-template-columns: repeat(2, 1fr); }
+            .impact-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid { grid-template-columns: 1fr; }
             .skills-container { grid-template-columns: 1fr; }
             .project-grid { grid-template-columns: 1fr; }
             .method-grid { grid-template-columns: 1fr; }
+            .impact-grid { grid-template-columns: 1fr; }
             h2 { font-size: 22px; }
             .main-content { padding: 30px 20px; }
         }
 
         @media (max-width: 480px) {
-            .metrics-grid { grid-template-columns: 1fr; }
             .metric-val { font-size: 26px; }
             .btn-group { gap: 10px; }
             .footer-quote { padding: 25px; }
@@ -754,32 +839,68 @@
                 <div class="section-line"></div>
             </div>
             
-            <p>Resultados medibles obtenidos mediante la implementación de mejores prácticas, automatización y monitorización avanzada:</p>
+            <p class="impact-intro">
+                Durante mi trayectoria profesional, he transformado indicadores técnicos en resultados de negocio medibles. 
+                Estos KPIs reflejan el impacto generado en entornos de <strong>alta criticidad operativa</strong>:
+            </p>
             
             <div class="metrics-grid">
                 <div class="metric-card">
                     <span class="metric-val">&gt;99.9%</span>
                     <span class="metric-label">Disponibilidad Sistemas Críticos</span>
+                    <span class="metric-context">SLA mantenido durante 24+ meses</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-val">&gt;70%</span>
+                    <span class="metric-val">70%</span>
                     <span class="metric-label">Reducción Tareas Manuales</span>
+                    <span class="metric-context">Mediante automatización PowerShell/Bash</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-val">60%</span>
                     <span class="metric-label">↓ Tiempo Respuesta Incidencias</span>
+                    <span class="metric-context">De 4h promedio a 1.5h promedio</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-val">40%</span>
-                    <span class="metric-label">↓ MTTD (Monitorización)</span>
+                    <span class="metric-label">↓ MTTD (Detección Incidentes)</span>
+                    <span class="metric-context">Con implementación de Grafana/Check_MK</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-val">20%</span>
                     <span class="metric-label">Capacidad Operativa Liberada</span>
+                    <span class="metric-context">Para proyectos estratégicos vs. mantenimiento</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-val">7</span>
-                    <span class="metric-label">Especialistas Liderados</span>
+                    <span class="metric-label">Especialistas Coordinados</span>
+                    <span class="metric-context">Liderazgo técnico de equipo multidisciplinar</span>
+                </div>
+            </div>
+
+            <div class="impact-summary">
+                <h3>📊 Traducción a Valor de Negocio</h3>
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <span class="impact-icon">💰</span>
+                        <div>
+                            <strong>Reducción de Costes Operativos</strong>
+                            <p>Menos horas hombre en tareas repetitivas = mayor ROI del equipo IT</p>
+                        </div>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">🛡️</span>
+                        <div>
+                            <strong>Continuidad del Negocio</strong>
+                            <p>99.9% uptime = sin pérdidas por paradas de sistemas críticos</p>
+                        </div>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">📈</span>
+                        <div>
+                            <strong>Escalabilidad</strong>
+                            <p>20% capacidad liberada = equipo puede asumir nuevos proyectos sin ampliar plantilla</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1090,6 +1211,11 @@
                     <h4>📈 Mejora Continua (Kaizen)</h4>
                     <p>Enfoque proactivo orientado a resultados numéricos, detectando cuellos de botella y asegurando la culminación exitosa de cada fase del proyecto.</p>
                 </div>
+
+                <div class="method-card">
+                    <h4>🎯 Alineación con Negocio</h4>
+                    <p>Infraestructuras resilientes diseñadas para soportar objetivos de negocio y garantizar continuidad operativa.</p>
+                </div>
             </div>
         </section>
 
@@ -1105,7 +1231,7 @@
                     <div class="education-icon">🎓</div>
                     <div class="education-info">
                         <h4>Técnico Superior en Administración de Sistemas en Red (ASIR)</h4>
-                        <p>Formación oficial en gestión de infraestructuras IT</p>
+                        <p>DIGITECHFP | Formación oficial en gestión de infraestructuras IT</p>
                     </div>
                 </div>
 
@@ -1137,7 +1263,7 @@
                     <div class="education-icon">🏆</div>
                     <div class="education-info">
                         <h4>Microsoft Certified Professional (MCP)</h4>
-                        <p>ID: 3357452 - Certificación Microsoft oficial</p>
+                        <p>ID: 3357452 | Certificación Microsoft oficial</p>
                     </div>
                 </div>
 
