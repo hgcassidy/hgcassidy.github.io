@@ -50,7 +50,7 @@
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
         @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        /* SIDEBAR - COMPACTO PARA NO REQUERIR SCROLL */
+        /* SIDEBAR */
         .sidebar { 
             width: 320px; 
             background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%); 
@@ -262,6 +262,7 @@
         section:nth-child(5) { animation-delay: 0.5s; }
         section:nth-child(6) { animation-delay: 0.6s; }
         section:nth-child(7) { animation-delay: 0.7s; }
+        section:nth-child(8) { animation-delay: 0.8s; }
 
         .section-header {
             display: flex;
@@ -305,6 +306,114 @@
         }
 
         .highlight { color: var(--accent); font-weight: 600; }
+
+        /* EXPERIENCE SECTION - NUEVO */
+        .experience-card {
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%);
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .experience-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .experience-title h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--accent);
+            border: none;
+            padding: 0;
+        }
+
+        .experience-company {
+            font-size: 14px;
+            color: var(--text);
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        .experience-location {
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .experience-period {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .experience-achievements {
+            margin-top: 20px;
+        }
+
+        .experience-achievements h4 {
+            font-size: 13px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .experience-achievements ul {
+            list-style: none;
+        }
+
+        .experience-achievements li {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .experience-achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .experience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .experience-tag {
+            background: rgba(34, 211, 238, 0.08);
+            color: var(--text-dim);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
         /* METRIC CARDS */
         .metrics-grid { 
@@ -748,6 +857,8 @@
             .skills-container { grid-template-columns: 1fr; }
             .method-grid { grid-template-columns: repeat(2, 1fr); }
             .impact-grid { grid-template-columns: repeat(2, 1fr); }
+            .experience-header { flex-direction: column; gap: 10px; }
+            .experience-period { width: 100%; text-align: center; }
         }
 
         @media (max-width: 768px) {
@@ -790,11 +901,12 @@
         
         <h1 class="name">Harvy Cassidy</h1>
         <div class="sidebar-subtitle">Especialista en Administración de Sistemas en Red</div>
-        <div class="location">📍 España | 🔓 Disponible</div>
+        <div class="location">📍 España |  Disponible</div>
         
         <nav>
             <ul class="nav-links">
                 <li><a href="#about"><span>🧠</span> Propuesta de Valor</a></li>
+                <li><a href="#experience"><span>💼</span> Experiencia</a></li>
                 <li><a href="#impact"><span>🚀</span> Impacto en Negocio</a></li>
                 <li><a href="#skills"><span>🧩</span> Especialización Técnica</a></li>
                 <li><a href="#projects"><span>🏗️</span> Proyectos Estratégicos</a></li>
@@ -865,6 +977,49 @@
             </div>
         </section>
 
+        <!-- EXPERIENCIA LABORAL - NUEVA SECCIÓN -->
+        <section id="experience">
+            <div class="section-header">
+                <h2><span>💼</span> Experiencia Laboral</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Administrador de Sistemas Informáticos en Red</h3>
+                        <div class="experience-company">Inerza - Inetel (Compañía Cervecera de Canarias)</div>
+                        <div class="experience-location">📍 Tenerife, España</div>
+                    </div>
+                    <div class="experience-period">2022 - 2025</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>📋 Responsabilidades y Logros</h4>
+                    <ul>
+                        <li><strong>Infraestructura:</strong> Gestión de <span class="highlight">60 servidores (Win/Lin)</span> y cabinas Dell EMC, garantizando un <span class="highlight">SLA del 99.9%</span></li>
+                        <li><strong>Automatización:</strong> Optimización del Active Directory mediante <span class="highlight">PowerShell</span>, automatizando auditorías de cuentas y reportes de cumplimiento mensual</li>
+                        <li><strong>Monitorización:</strong> Implementación de dashboards en <span class="highlight">Grafana/Power BI</span> para seguimiento de incidentes y redes en tiempo real</li>
+                        <li><strong>Migraciones:</strong> Apoyo técnico en virtualización de servidores <span class="highlight">SAP</span> y despliegue de firewalls <span class="highlight">FortiGate</span> (SQL Server y configs. de red)</li>
+                        <li><strong>ITSM:</strong> Soporte en la migración de <span class="highlight">GLPI a ServiceNow</span>, gestionando la integridad de datos mediante consultas SQL</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">VMware</span>
+                    <span class="experience-tag">Hyper-V</span>
+                    <span class="experience-tag">PowerShell</span>
+                    <span class="experience-tag">Grafana</span>
+                    <span class="experience-tag">ServiceNow</span>
+                    <span class="experience-tag">FortiGate</span>
+                    <span class="experience-tag">Dell EMC SAN</span>
+                    <span class="experience-tag">SQL Server</span>
+                    <span class="experience-tag">Active Directory</span>
+                    <span class="experience-tag">SAP</span>
+                </div>
+            </div>
+        </section>
+
         <!-- IMPACTO EN NEGOCIO -->
         <section id="impact">
             <div class="section-header">
@@ -881,7 +1036,7 @@
                 <div class="metric-card">
                     <span class="metric-val">&gt;99.9%</span>
                     <span class="metric-label">Disponibilidad Sistemas Críticos</span>
-                    <span class="metric-context">SLA mantenido durante 24+ meses</span>
+                    <span class="metric-context">SLA mantenido consistentemente</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-val">70%</span>
@@ -1264,7 +1419,7 @@
                     <div class="education-icon">🎓</div>
                     <div class="education-info">
                         <h4>Técnico Superior en Administración de Sistemas en Red (ASIR)</h4>
-                        <p>DIGITECHFP | Formación oficial en gestión de infraestructuras IT</p>
+                        <p>DIGITECHFP | 2025-2027</p>
                     </div>
                 </div>
 
@@ -1322,8 +1477,10 @@
                     <h3>Información de Contacto</h3>
                     <div class="skill-tags" style="flex-direction: column; align-items: flex-start;">
                         <span class="tag">📧 hgcassidy@gmail.com</span>
+                        <span class="tag">📞 +34 606 927 948</span>
                         <span class="tag">💼 <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" style="color: var(--accent); text-decoration: none;">linkedin.com/in/harvy-cassidy-8a69a296/</a></span>
-                        <span class="tag">📍 España</span>
+                        <span class="tag">📍 Santa Cruz de Tenerife, España</span>
+                        <span class="tag">🚗 Permiso de Conducir: B</span>
                     </div>
                 </div>
 
