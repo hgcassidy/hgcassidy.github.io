@@ -1,1 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harvy Cassidy - Systems Engineer | Critical Infrastructures, Automation, IT Project Management, IT Security">
+    <meta name="keywords" content="Systems Engineer, IT Infrastructure, PowerShell, VMware, Active Directory, Linux, Automation, PM2, DevOps, Project Management">
+    <meta name="author" content="Harvy Cassidy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Harvy Cassidy — Systems Engineer & IT Strategist">
+    <meta property="og:description" content="15+ years leading technological transformation, critical infrastructures and high-impact projects.">
+    <meta property="og:type" content="website">
+    <title>Harvy Cassidy — Systems Engineer | Infrastructures & IT Projects</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f16;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --panel: #1f2937;
+            --panel-hover: #2d3748;
+            --accent: #22d3ee;
+            --accent2: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+            --text: #ffffff;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(34, 211, 238, 0.4);
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-accent: 0 4px 20px rgba(34, 211, 238, 0.15);
+        }
 
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Poppins', sans-serif; 
+            display: flex; 
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* SIDEBAR */
+        .sidebar { 
+            width: 320px; 
+            background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%); 
+            padding: 25px 20px; 
+            height: 100vh; 
+            position: fixed; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            border-right: 1px solid var(--border); 
+            overflow-y: auto; 
+            z-index: 100;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .profile-container { position: relative; margin-bottom: 12px; }
+        
+        .profile-pic { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 3px solid var(--accent); 
+            box-shadow: var(--shadow-accent);
+            transition: 0.3s;
+        }
+        
+        .profile-pic:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.4);
+        }
+
+        .status-badge { 
+            font-size: 10px; 
+            background: rgba(34, 211, 238, 0.15); 
+            color: var(--accent); 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            margin-bottom: 10px; 
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .name { 
+            font-size: 18px; 
+            font-weight: 700; 
+            text-align: center; 
+            color: var(--text); 
+            margin-bottom: 3px;
+        }
+
+        .sidebar-subtitle { 
+            color: var(--accent); 
+            font-size: 10px; 
+            margin-bottom: 8px; 
+            text-align: center; 
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1.3;
+        }
+
+        .location { 
+            color: var(--text-dim); 
+            font-size: 11px; 
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links { 
+            list-style: none; 
+            width: 100%; 
+            margin-bottom: 15px; 
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-dim); 
+            font-size: 12px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px; 
+            border-radius: 6px; 
+            transition: all 0.3s; 
+            margin-bottom: 3px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover { 
+            background: var(--accent-gradient); 
+            color: var(--bg); 
+            transform: translateX(5px);
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            background: var(--panel);
+            color: var(--accent);
+            border: 1px solid var(--border-hover);
+        }
+
+        .contact-section { 
+            width: 100%; 
+            margin-top: auto; 
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-group { 
+            display: flex; 
+            flex-direction: column; 
+            width: 100%; 
+            gap: 8px; 
+        }
+
+        .btn { 
+            padding: 10px 12px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 11px; 
+            text-align: center; 
+            transition: all 0.3s; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-primary { 
+            background: var(--accent-gradient); 
+            color: var(--bg); 
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-primary:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(34, 211, 238, 0.3);
+        }
+
+        .btn-secondary { 
+            border: 1px solid var(--accent); 
+            color: var(--accent); 
+            background: transparent;
+        }
+
+        .btn-secondary:hover { 
+            background: rgba(34, 211, 238, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-cv {
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        .btn-cv:hover {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        /* HEADER IMAGE */
+        .header-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* MAIN CONTENT */
+        .main-content { 
+            margin-left: 320px; 
+            padding: 40px 60px; 
+            width: calc(100% - 320px); 
+            max-width: 1400px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        section { 
+            margin-bottom: 70px; 
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+        section:nth-child(8) { animation-delay: 0.8s; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 { 
+            font-size: 24px; 
+            color: var(--text); 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 700;
+        }
+
+        h2 span { color: var(--accent); }
+
+        .section-line { 
+            flex: 1; 
+            height: 2px; 
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            opacity: 0.5;
+        }
+
+        h3 { 
+            font-size: 16px; 
+            color: var(--text); 
+            margin: 20px 0 12px; 
+            border-left: 4px solid var(--accent); 
+            padding-left: 10px;
+            font-weight: 600;
+        }
+
+        p { 
+            font-size: 14px; 
+            line-height: 1.7; 
+            color: var(--text-dim); 
+            margin-bottom: 15px;
+        }
+
+        .highlight { color: var(--accent); font-weight: 600; }
+
+        /* EXPERIENCE SECTION */
+        .experience-card {
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%);
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .experience-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .experience-title h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--accent);
+            border: none;
+            padding: 0;
+        }
+
+        .experience-company {
+            font-size: 14px;
+            color: var(--text);
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        .experience-location {
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .experience-period {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .experience-achievements {
+            margin-top: 20px;
+        }
+
+        .experience-achievements h4 {
+            font-size: 13px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .experience-achievements ul {
+            list-style: none;
+        }
+
+        .experience-achievements li {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .experience-achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .experience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .experience-tag {
+            background: rgba(34, 211, 238, 0.08);
+            color: var(--text-dim);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* METRIC CARDS */
+        .metrics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 18px; 
+            margin-top: 25px; 
+        }
+
+        .metric-card { 
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%); 
+            padding: 20px 15px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            text-align: center; 
+            transition: all 0.3s; 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover { 
+            border-color: var(--accent); 
+            transform: translateY(-6px); 
+            box-shadow: var(--shadow-accent);
+        }
+
+        .metric-card:hover::before { transform: scaleX(1); }
+
+        .metric-val { 
+            display: block; 
+            font-size: 28px; 
+            font-weight: 700; 
+            color: var(--accent); 
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        .metric-label { 
+            font-size: 10px; 
+            color: var(--text-dim); 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px; 
+            margin-top: 6px;
+            display: block;
+        }
+
+        .metric-context {
+            display: block;
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        /* Impact Section Specific */
+        .impact-intro {
+            font-size: 14px;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+            padding: 18px 20px;
+            background: rgba(34, 211, 238, 0.05);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .impact-summary {
+            margin-top: 35px;
+            padding: 25px;
+            background: linear-gradient(145deg, var(--bg2) 0%, var(--bg3) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .impact-summary h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: var(--text);
+            border: none;
+            padding: 0;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .impact-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 18px;
+            background: var(--panel);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .impact-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+        }
+
+        .impact-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .impact-item strong {
+            display: block;
+            color: var(--text);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .impact-item p {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* SKILLS TAGS */
+        .skills-container { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; 
+        }
+
+        .skill-box { 
+            background: var(--bg2); 
+            padding: 20px; 
+            border-radius: 10px; 
+            border: 1px solid var(--border); 
+            transition: all 0.3s;
+        }
+
+        .skill-box:hover { 
+            border-color: var(--border-hover); 
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .skill-box h3 { 
+            margin-top: 0; 
+            font-size: 15px;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skill-tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            margin-top: 12px; 
+        }
+
+        .tag { 
+            background: rgba(34, 211, 238, 0.08); 
+            color: var(--text-dim); 
+            padding: 5px 12px; 
+            border-radius: 5px; 
+            font-size: 11px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .tag:hover { 
+            border-color: var(--accent); 
+            color: var(--accent); 
+            background: rgba(34, 211, 238, 0.15);
+            transform: scale(1.05);
+        }
+
+        .tag.featured {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            font-weight: 600;
+            border: none;
+        }
+
+        /* PROJECTS */
+        .project-card { 
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%); 
+            padding: 28px; 
+            border-radius: 14px; 
+            border: 1px solid var(--border); 
+            margin-bottom: 25px; 
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .project-problem {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 18px;
+        }
+
+        .project-problem h4 {
+            color: #ef4444;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .project-problem p {
+            font-size: 12px;
+            margin: 0;
+            color: var(--text-dim);
+        }
+
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px; 
+            margin-top: 18px; 
+        }
+
+        .detail-item h4 { 
+            font-size: 12px; 
+            color: var(--accent); 
+            text-transform: uppercase; 
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .detail-item ul { 
+            list-style: none; 
+            font-size: 13px; 
+            color: var(--text-dim); 
+        }
+
+        .detail-item li { 
+            margin-bottom: 8px; 
+            position: relative; 
+            padding-left: 18px;
+            line-height: 1.5;
+        }
+
+        .detail-item li::before { 
+            content: '▸'; 
+            position: absolute; 
+            left: 0; 
+            color: var(--accent); 
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .project-results {
+            background: rgba(34, 211, 238, 0.05);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 18px;
+        }
+
+        .project-results h4 {
+            color: var(--accent);
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .result-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-badge {
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        /* METHODOLOGY */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .method-card {
+            background: var(--bg2);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .method-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .method-card h4 {
+            color: var(--accent);
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .method-card p {
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* EDUCATION */
+        .education-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .education-item {
+            background: var(--bg2);
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .education-item:hover {
+            border-color: var(--border-hover);
+            transform: translateX(5px);
+        }
+
+        .education-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .education-info h4 {
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .education-info p {
+            color: var(--text-dim);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* FOOTER QUOTE */
+        .footer-quote {
+            background: var(--accent-gradient);
+            padding: 35px;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: var(--shadow-accent);
+        }
+
+        .footer-quote p {
+            color: var(--bg);
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .sidebar { width: 280px; }
+            .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 35px 40px; }
+        }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                height: auto; 
+                position: relative; 
+                border-right: none; 
+                border-bottom: 1px solid var(--border);
+                padding: 20px 15px;
+            }
+            .main-content { 
+                margin-left: 0; 
+                width: 100%; 
+                padding: 30px 20px; 
+            }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .nav-links a { padding: 8px 12px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-container { grid-template-columns: 1fr; }
+            .method-grid { grid-template-columns: repeat(2, 1fr); }
+            .impact-grid { grid-template-columns: repeat(2, 1fr); }
+            .experience-header { flex-direction: column; gap: 10px; }
+            .experience-period { width: 100%; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            .header-image { max-height: 200px; object-fit: cover; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .skills-container { grid-template-columns: 1fr; }
+            .project-grid { grid-template-columns: 1fr; }
+            .method-grid { grid-template-columns: 1fr; }
+            .impact-grid { grid-template-columns: 1fr; }
+            h2 { font-size: 20px; }
+            .main-content { padding: 25px 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .metric-val { font-size: 24px; }
+            .btn-group { gap: 6px; }
+            .footer-quote { padding: 20px; }
+            .footer-quote p { font-size: 14px; }
+        }
+
+        /* Print Styles for ATS */
+        @media print {
+            .sidebar { position: static; width: 100%; height: auto; }
+            .main-content { margin-left: 0; width: 100%; }
+            body { display: block; }
+            .nav-links, .btn-group, .header-image { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile-container">
+            <img src="../profile.jpg" alt="Harvy Cassidy - Systems Engineer" class="profile-pic">
+        </div>
+        
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <span>Open to Strategic Projects</span>
+        </div>
+        
+        <h1 class="name">Harvy George Cassidy</h1>
+        <div class="sidebar-subtitle">Technology Infrastructure Specialist</div>
+        <div class="location">📍 Santa Cruz de Tenerife, Spain</div>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about"><span>🎯</span> Professional Profile</a></li>
+                <li><a href="#experience"><span>💼</span> Professional Experience</a></li>
+                <li><a href="#impact"><span>📈</span> Measurable Impact</a></li>
+                <li><a href="#skills"><span>🛠️</span> Technical Competencies</a></li>
+                <li><a href="#projects"><span>🏗️</span> Strategic Projects</a></li>
+                <li><a href="#method"><span>🧭</span> Methodology</a></li>
+                <li><a href="#education"><span>🎓</span> Education & Certifications</a></li>
+                <li><a href="#contact"><span>📬</span> Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="contact-section">
+            <div class="btn-group">
+                <a href="mailto:hgcassidy@gmail.com" class="btn btn-primary">
+                    <span>📧</span> hgcassidy@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="https://github.com/hgcassidy" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <span>🐙</span> GitHub
+                </a>
+                <a href="../CV Harvy CAssidy ASIR.pdf" class="btn btn-secondary btn-cv" download>
+                    <span>📥</span> Download CV (PDF)
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- HEADER IMAGE -->
+        <img src="../header.png" alt="Harvy Cassidy - Header" class="header-image">
+
+        <!-- PROFESSIONAL PROFILE -->
+        <section id="about">
+            <div class="section-header">
+                <h2><span>🎯</span> Professional Profile</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <p>
+                <strong>Systems Engineer</strong> with over <span class="highlight">15 years</span> leading technological transformation in enterprises. 
+                Strategist specialized in <span class="highlight">designing, securing and optimizing critical infrastructures</span>, with a proven track record 
+                in <span class="highlight">team leadership</span> and delivery of projects that generate efficiency, reduce costs and protect the business.
+            </p>
+            
+            <p>
+                Expert in <span class="highlight">design and implementation of project management models</span>, with training in 
+                <span class="highlight">PM2 Essentials</span> for structured governance. I combine technical expertise in 
+                <span class="highlight">Microsoft/Linux environments, virtualization and automation</span> with agile methodologies 
+                <span class="highlight">(Scrum/Kanban)</span> to bring structure, control and visibility to complex project portfolios in dynamic environments.
+            </p>
+
+            <h3>🔑 Pillars of My Approach</h3>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>⚙️ Automation</h3>
+                    <p>PowerShell/Bash scripting to reduce operational workload and human errors through critical process optimization.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>🔐 Security & Resilience</h3>
+                    <p>Hardening, security policies and high availability architectures to ensure business continuity.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>📊 IT Governance</h3>
+                    <p>PM2, KPIs, SLAs and executive reporting with Power BI and Grafana for full alignment with business objectives.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>🤝 Technical Leadership</h3>
+                    <p>Coordination of multidisciplinary teams and stakeholders in high-demand environments with results-oriented focus.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL EXPERIENCE -->
+        <section id="experience">
+            <div class="section-header">
+                <h2><span>💼</span> Professional Experience</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Project Manager</h3>
+                        <div class="experience-company">Compañía Cervecera de Canarias (Inerza-Inetel)</div>
+                        <div class="experience-location">📍 Tenerife, Spain</div>
+                    </div>
+                    <div class="experience-period">March 2022 - October 2025</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>🎯 Key Responsibilities</h4>
+                    <ul>
+                        <li><strong>Strategic Leadership:</strong> Direction of technological transformation ensuring alignment of initiatives with business objectives.</li>
+                        <li><strong>PMO Management:</strong> Administration of high-level projects, establishing planning, risk and dependency controls.</li>
+                        <li><strong>Critical Infrastructure:</strong> Management of servers, virtualization and high availability systems.</li>
+                        <li><strong>Optimization:</strong> Automation of critical processes to improve operational efficiency and reduce delivery times.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">Project Management</span>
+                    <span class="experience-tag">PMO</span>
+                    <span class="experience-tag">Critical Infrastructure</span>
+                    <span class="experience-tag">Automation</span>
+                    <span class="experience-tag">Technical Leadership</span>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Technology Manager</h3>
+                        <div class="experience-company">Inversiones Voltaire</div>
+                        <div class="experience-location">📍 Remote / Spain</div>
+                    </div>
+                    <div class="experience-period">May 2019 - September 2021</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>🎯 Key Responsibilities</h4>
+                    <ul>
+                        <li><strong>IT Governance:</strong> Design and supervision of new applications and systems aligned with the company's digital strategy.</li>
+                        <li><strong>Security & Control:</strong> Comprehensive management of technological security and administration of automation projects.</li>
+                        <li><strong>Architecture:</strong> Design of new scalable and resilient platforms.</li>
+                        <li><strong>Continuity:</strong> Guarantee of availability and protection of critical assets.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">IT Governance</span>
+                    <span class="experience-tag">Security</span>
+                    <span class="experience-tag">Systems Architecture</span>
+                    <span class="experience-tag">Automation</span>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>IT Infrastructure Coordinator</h3>
+                        <div class="experience-company">STELLIONET, C.A.</div>
+                        <div class="experience-location">📍 Venezuela</div>
+                    </div>
+                    <div class="experience-period">October 2014 - April 2019</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>🎯 Key Responsibilities</h4>
+                    <ul>
+                        <li><strong>Critical Infrastructure:</strong> Responsible for deployment and maintenance of IT infrastructure, coordinating technical teams and suppliers.</li>
+                        <li><strong>Server Administration:</strong> Management of Microsoft and Linux servers in productive environments.</li>
+                        <li><strong>Network Management:</strong> Implementation of IT security systems and networking management (Firewalls).</li>
+                        <li><strong>Critical Support:</strong> Handling and correction of IT infrastructure failures, structured cabling and active equipment.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">Windows Server</span>
+                    <span class="experience-tag">Linux</span>
+                    <span class="experience-tag">Networking</span>
+                    <span class="experience-tag">Firewalls</span>
+                    <span class="experience-tag">IT Support</span>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Technology Manager</h3>
+                        <div class="experience-company">GRUPO CUSTOM</div>
+                        <div class="experience-location">📍 Venezuela</div>
+                    </div>
+                    <div class="experience-period">July 2010 - August 2014</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>🎯 Key Responsibilities</h4>
+                    <ul>
+                        <li><strong>ERP/CRM Project Leader:</strong> Integral direction of the lifecycle in the implementation of Microsoft Dynamics and Vtiger CRM, managing timelines, budgets and deliverables.</li>
+                        <li><strong>Platform Management:</strong> Administration of the corporate technological platform.</li>
+                        <li><strong>Digital Transformation:</strong> Migration of manual processes to integrated systems.</li>
+                        <li><strong>Coordination:</strong> Management of suppliers, timelines, budgets and deliverables.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">Microsoft Dynamics</span>
+                    <span class="experience-tag">Vtiger CRM</span>
+                    <span class="experience-tag">ERP Implementation</span>
+                    <span class="experience-tag">Supplier Management</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEASURABLE IMPACT -->
+        <section id="impact">
+            <div class="section-header">
+                <h2><span>📈</span> Measurable Impact</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <p class="impact-intro">
+                Throughout my professional career, I have transformed technical indicators into measurable business results. 
+                These KPIs reflect the impact generated in environments of <strong>high operational criticality</strong>:
+            </p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-val">15+</span>
+                    <span class="metric-label">Years of Experience</span>
+                    <span class="metric-context">Leading IT transformation</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">4</span>
+                    <span class="metric-label">ERP/CRM Projects</span>
+                    <span class="metric-context">Successful implementations</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">100%</span>
+                    <span class="metric-label">Business-IT Alignment</span>
+                    <span class="metric-context">PM2 & Agile methodology</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">70%</span>
+                    <span class="metric-label">Manual Tasks Reduced</span>
+                    <span class="metric-context">Through PowerShell/Bash automation</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">99.9%</span>
+                    <span class="metric-label">Systems Availability</span>
+                    <span class="metric-context">SLA consistently maintained</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">∞</span>
+                    <span class="metric-label">Coffees</span>
+                    <span class="metric-context">Fuel for 3 AM incidents ☕</span>
+                </div>
+            </div>
+
+            <div class="impact-summary">
+                <h3>💡 Value for Your Organization</h3>
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <span class="impact-icon">🎯</span>
+                        <div>
+                            <strong>Strategic Focus</strong>
+                            <p>Infrastructures designed to support business objectives, not just to "make it work".</p>
+                        </div>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">⚡</span>
+                        <div>
+                            <strong>Agile Execution</strong>
+                            <p>Proven methodologies to deliver value quickly without sacrificing quality or security.</p>
+                        </div>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">🛡️</span>
+                        <div>
+                            <strong>Controlled Risk</strong>
+                            <p>Proactive prevention, hardening and contingency plans for peace of mind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL COMPETENCIES -->
+        <section id="skills">
+            <div class="section-header">
+                <h2><span>🛠️</span> Technical Competencies</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>💻 Operating Systems</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Windows Server</span>
+                        <span class="tag featured">Linux</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🌐 Networks & Security</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Firewalls</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">VLANs</span>
+                        <span class="tag">VPNs</span>
+                        <span class="tag">DNS</span>
+                        <span class="tag">DHCP</span>
+                        <span class="tag">Perimeter Security</span>
+                        <span class="tag">Hardening</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🖥️ Directory Services & Identity</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Active Directory</span>
+                        <span class="tag">GPOs</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🖥️ Virtualization & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">VMware</span>
+                        <span class="tag featured">Hyper-V</span>
+                        <span class="tag">On-Premise</span>
+                        <span class="tag">Hybrid</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>⚙️ Automation</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">PowerShell</span>
+                        <span class="tag featured">Bash</span>
+                        <span class="tag">Scripting</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>📊 Monitoring & Reporting</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Grafana</span>
+                        <span class="tag featured">Power BI</span>
+                        <span class="tag">Check_MK</span>
+                        <span class="tag">KPIs/SLAs</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🗄️ Databases</h3>
+                    <div class="skill-tags">
+                        <span class="tag">SQL Server</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">MariaDB</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🛠️ Service Management</h3>
+                    <div class="skill-tags">
+                        <span class="tag">GLPI</span>
+                        <span class="tag">Microsoft Dynamics</span>
+                        <span class="tag">Vtiger CRM</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🧾 SAP (Intermediate)</h3>
+                    <div class="skill-tags">
+                        <span class="tag">SAP Virtualization</span>
+                        <span class="tag">User Management</span>
+                        <span class="tag">Transports</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🧠 Project Management</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">PM2 Essentials</span>
+                        <span class="tag">Agile/Scrum</span>
+                        <span class="tag">Kanban</span>
+                        <span class="tag">ITIL</span>
+                        <span class="tag">Crisis Management</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🤖 Artificial Intelligence</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Generative AI</span>
+                        <span class="tag">AI-Powered Automation</span>
+                        <span class="tag">Predictive Resolution</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>👤 Soft Skills</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Results-Oriented</span>
+                        <span class="tag featured">Adaptability</span>
+                        <span class="tag">Agile Learning</span>
+                        <span class="tag">Cross-Functional Leadership</span>
+                        <span class="tag">Crisis Management</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIC PROJECTS -->
+        <section id="projects">
+            <div class="section-header">
+                <h2><span>🏗️</span> Strategic Projects</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- PROJECT 1 -->
+            <div class="project-card">
+                <h3>🔒 Critical Infrastructure Migration & Modernization</h3>
+                
+                <div class="project-problem">
+                    <h4>⚠️ Challenge</h4>
+                    <p>Legacy infrastructure with security risks, non-standardized configurations and high operational criticality.</p>
+                </div>
+
+                <div class="project-grid">
+                    <div class="detail-item">
+                        <h4>✅ Action</h4>
+                        <ul>
+                            <li>Led virtualization of SAP ERP in production environment</li>
+                            <li>Migration of high-risk on-premise systems to modern infrastructure</li>
+                            <li>FortiGate firewall migration without interruptions</li>
+                            <li>Redesign of security policies and network segmentation</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📈 Result</h4>
+                        <ul>
+                            <li>Operational continuity with no business impact</li>
+                            <li>Reduced attack surface</li>
+                            <li>Significant improvement in perimeter security</li>
+                            <li>More resilient and scalable infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-results">
+                    <h4>🎯 Key Impact</h4>
+                    <div class="result-badges">
+                        <span class="result-badge">Zero Downtime</span>
+                        <span class="result-badge">Enhanced Security</span>
+                        <span class="result-badge">Scalable Infrastructure</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 2 -->
+            <div class="project-card">
+                <h3>🤖 Automation & Operational Optimization</h3>
+                
+                <div class="project-problem">
+                    <h4>⚠️ Challenge</h4>
+                    <p>High workload of manual tasks, repetitive processes and low operational efficiency.</p>
+                </div>
+
+                <div class="project-grid">
+                    <div class="detail-item">
+                        <h4>✅ Action</h4>
+                        <ul>
+                            <li>Development of automations with PowerShell and Bash</li>
+                            <li>Optimization of administrative and operational processes</li>
+                            <li>Implementation of AI-based solutions for decision-making</li>
+                            <li>Automation for resource planning, audits and predictive resolution</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📈 Result</h4>
+                        <ul>
+                            <li>Reduction of manual tasks by over 70%</li>
+                            <li>Release of 20% of team capacity</li>
+                            <li>Significant improvement in operational efficiency</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-results">
+                    <h4>🎯 Key Impact</h4>
+                    <div class="result-badges">
+                        <span class="result-badge">70% Fewer Manual Tasks</span>
+                        <span class="result-badge">20% Capacity Freed</span>
+                        <span class="result-badge">AI Integrated</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 3 -->
+            <div class="project-card">
+                <h3>📊 Advanced Monitoring & Incident Management</h3>
+                
+                <div class="project-problem">
+                    <h4>⚠️ Challenge</h4>
+                    <p>Late detection of incidents and elevated response times.</p>
+                </div>
+
+                <div class="project-grid">
+                    <div class="detail-item">
+                        <h4>✅ Action</h4>
+                        <ul>
+                            <li>Implementation of dashboards in Grafana and advanced monitoring tools</li>
+                            <li>Configuration of proactive alerts</li>
+                            <li>Tracking through KPIs and SLAs</li>
+                            <li>Coordination of technical team (7 specialists)</li>
+                        </ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>📈 Result</h4>
+                        <ul>
+                            <li>40% reduction in MTTD (Mean Time To Detect)</li>
+                            <li>60% decrease in response time</li>
+                            <li>SLA maintained at 99.9% uptime</li>
+                            <li>Greater system stability and resilience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-results">
+                    <h4>🎯 Key Impact</h4>
+                    <div class="result-badges">
+                        <span class="result-badge">99.9% Uptime</span>
+                        <span class="result-badge">MTTD -40%</span>
+                        <span class="result-badge">Response -60%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- METHODOLOGY & GOVERNANCE -->
+        <section id="method">
+            <div class="section-header">
+                <h2><span>🧭</span> Methodology & IT Governance</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <p>
+                My professional approach integrates operational agility with the rigor of project management 
+                to ensure resilient infrastructures aligned with business objectives:
+            </p>
+
+            <div class="method-grid">
+                <div class="method-card">
+                    <h4>🔄 Frameworks & Agility</h4>
+                    <p>Application of agile methodologies (Scrum/Kanban) for efficient technical backlog management and PM2 Essentials for structured governance of complex projects.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>📊 Data-Driven Culture</h4>
+                    <p>Specialist in developing dashboards in Grafana and Power BI for tracking critical KPIs, SLA control and executive reporting of progress, deviations and blockers.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>📚 Knowledge Management</h4>
+                    <p>Leadership in asset standardization through creation and improvement of policies, procedures and technical documentation for the IT department.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>💬 Strategic Communication</h4>
+                    <p>Experience transforming technical data into actionable insights for decision-making and resource optimization.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>📈 Continuous Improvement (Kaizen)</h4>
+                    <p>Proactive approach oriented to numerical results, detecting bottlenecks and ensuring successful completion of each project phase.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>🎯 Business Alignment</h4>
+                    <p>Resilient infrastructures designed to support business objectives and ensure operational continuity.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS -->
+        <section id="education">
+            <div class="section-header">
+                <h2><span>🎓</span> Education & Certifications</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="education-list">
+                <div class="education-item">
+                    <div class="education-icon">🎓</div>
+                    <div class="education-info">
+                        <h4>Systems Engineer</h4>
+                        <p>Universidad Nacional Abierta | 2000 - 2006</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">📋</div>
+                    <div class="education-info">
+                        <h4>PM2 Essentials - TecnoFor</h4>
+                        <p>Structured IT project management</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🤖</div>
+                    <div class="education-info">
+                        <h4>Generative Artificial Intelligence - TecnoFor</h4>
+                        <p>AI application in enterprise environments</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🚨</div>
+                    <div class="education-info">
+                        <h4>Apollo 13 (Crisis Management) - TecnoFor</h4>
+                        <p>Simulation and resolution of operational crises</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🏆</div>
+                    <div class="education-info">
+                        <h4>Microsoft Certified Professional (MCP)</h4>
+                        <p>ID: 3357452 | Official Microsoft certification</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🌍</div>
+                    <div class="education-info">
+                        <h4>Languages</h4>
+                        <p>Spanish (Native) | English (B2 - Professional)</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🚗</div>
+                    <div class="education-info">
+                        <h4>Driver's License</h4>
+                        <p>Class B</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="section-header">
+                <h2><span>📬</span> Contact</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>Contact Information</h3>
+                    <div class="skill-tags" style="flex-direction: column; align-items: flex-start;">
+                        <span class="tag">📧 hgcassidy@gmail.com</span>
+                        <span class="tag">📞 +34 606 927 948</span>
+                        <span class="tag">💼 <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" style="color: var(--accent); text-decoration: none;">linkedin.com/in/harvy-cassidy-8a69a296/</a></span>
+                        <span class="tag">🐙 <a href="https://github.com/hgcassidy" style="color: var(--accent); text-decoration: none;">github.com/hgcassidy</a></span>
+                        <span class="tag">📍 Calle el molino N° 33, 8107 Santa Cruz de Tenerife, Spain</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>Availability</h3>
+                    <p>🟢 Open to opportunities in:</p>
+                    <div class="skill-tags">
+                        <span class="tag featured">IT Leadership</span>
+                        <span class="tag featured">Critical Infrastructure</span>
+                        <span class="tag">Automation</span>
+                        <span class="tag">Digital Transformation</span>
+                        <span class="tag">Project Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER QUOTE -->
+            <div class="footer-quote">
+                <p>💡 "Technology is not the end, it's the means to make businesses more resilient, efficient and human."</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Active navigation highlight on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
