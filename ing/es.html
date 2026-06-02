@@ -634,6 +634,23 @@
             color: var(--accent);
         }
 
+        .project-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 8px;
+        }
+
+        .project-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         .project-problem {
             background: rgba(239, 68, 68, 0.1);
             border-left: 3px solid #ef4444;
@@ -726,6 +743,49 @@
             font-size: 11px;
             font-weight: 500;
             border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        /* COLLAPSIBLE PROJECTS SECTION */
+        .projects-container {
+            position: relative;
+        }
+
+        .projects-hidden {
+            display: none;
+        }
+
+        .projects-hidden.show {
+            display: block;
+        }
+
+        .expand-btn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto 0;
+            width: auto;
+            backdrop-filter: blur(4px);
+        }
+
+        .expand-btn:hover {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin-top: 15px;
         }
 
         /* METHODOLOGY */
@@ -1120,9 +1180,9 @@
                     <span class="metric-context">Liderando transformación TI</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-val">4</span>
-                    <span class="metric-label">Proyectos ERP/CRM</span>
-                    <span class="metric-context">Implementaciones exitosas</span>
+                    <span class="metric-val">20+</span>
+                    <span class="metric-label">Proyectos Estratégicos</span>
+                    <span class="metric-context">Infraestructura y automatización</span>
                 </div>
                 <div class="metric-card">
                     <span class="metric-val">100%</span>
@@ -1209,16 +1269,19 @@
                     <div class="skill-tags">
                         <span class="tag featured">Active Directory</span>
                         <span class="tag">GPOs</span>
+                        <span class="tag">OpenLDAP</span>
+                        <span class="tag">Samba</span>
                     </div>
                 </div>
 
                 <div class="skill-box">
                     <h3>🖥️ Virtualización y Plataformas</h3>
                     <div class="skill-tags">
-                        <span class="tag featured">VMware</span>
+                        <span class="tag featured">VMware ESXi</span>
                         <span class="tag featured">Hyper-V</span>
                         <span class="tag">On-Premise</span>
                         <span class="tag">Híbrido</span>
+                        <span class="tag">Alta Disponibilidad</span>
                     </div>
                 </div>
 
@@ -1228,6 +1291,7 @@
                         <span class="tag featured">PowerShell</span>
                         <span class="tag featured">Bash</span>
                         <span class="tag">Scripting</span>
+                        <span class="tag">Ansible</span>
                     </div>
                 </div>
 
@@ -1254,6 +1318,7 @@
                     <h3>🛠️ Gestión de Servicios</h3>
                     <div class="skill-tags">
                         <span class="tag">GLPI</span>
+                        <span class="tag">ServiceNow</span>
                         <span class="tag">Microsoft Dynamics</span>
                         <span class="tag">Vtiger CRM</span>
                     </div>
@@ -1301,129 +1366,721 @@
             </div>
         </section>
 
-        <!-- PROYECTOS ESTRATÉGICOS -->
+        <!-- PROYECTOS ESTRATÉGICOS - CON COLLAPSE -->
         <section id="projects">
             <div class="section-header">
                 <h2><span>🏗️</span> Proyectos Estratégicos</h2>
                 <div class="section-line"></div>
             </div>
 
-            <!-- PROYECTO 1 -->
-            <div class="project-card">
-                <h3>🔒 Migración y Modernización de Infraestructura Crítica</h3>
-                
-                <div class="project-problem">
-                    <h4>⚠️ Problema</h4>
-                    <p>Infraestructura legacy con riesgos de seguridad, configuraciones no estandarizadas y alta criticidad operativa.</p>
+            <div class="projects-container">
+                <!-- PROYECTOS VISIBLES SIEMPRE (PRIMEROS 3 MÁS RECIENTES) -->
+                <div id="visible-projects">
+                    <!-- Proyecto 1: Automatización Active Directory -->
+                    <div class="project-card">
+                        <h3>🔐 Automatización Auditoría Active Directory con PowerShell</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2023 - Ago 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Riesgo de exposición por cuentas de administrador, servicio y contratistas no gestionadas adecuadamente, con permisos excesivos y falta de auditoría continua.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Desarrollo de automatizaciones PowerShell para auditoría continua de Active Directory</li>
+                                    <li>Generación de reportes periódicos detectando cuentas inactivas o con permisos excesivos</li>
+                                    <li>Disparo automático de alertas al equipo de seguridad</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Reducción del riesgo de exposición por credenciales no gestionadas</li>
+                                    <li>Cumplimiento garantizado de políticas de acceso mínimo</li>
+                                    <li>Auditoría continua y automatizada 24/7</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">PowerShell</span>
+                                <span class="result-badge">Active Directory</span>
+                                <span class="result-badge">Auditoría Automatizada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 2: Migración GLPI → ServiceNow -->
+                    <div class="project-card">
+                        <h3>🔄 Migración GLPI → ServiceNow — ITSM Corporativo</h3>
+                        <div class="project-meta">
+                            <span>📅 Jul 2024 - Abr 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Plataforma GLPI con limitaciones de trazabilidad, reporting y gestión avanzada de SLAs.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Liderazgo de migración completa a ServiceNow</li>
+                                    <li>Migración de histórico de tickets y redefinición de flujos de trabajo</li>
+                                    <li>Gestión de inventario de activos IT y formación del equipo técnico</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Elevada trazabilidad y capacidad de reporting</li>
+                                    <li>Mejora significativa en gestión de SLAs del departamento IT</li>
+                                    <li>Plataforma ITSM corporativa de nivel enterprise</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">ServiceNow</span>
+                                <span class="result-badge">Project Management</span>
+                                <span class="result-badge">MariaDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 3: Migración Windows 10 → Windows 11 -->
+                    <div class="project-card">
+                        <h3>🖥️ Migración Masiva Windows 10 → Windows 11 — 400 Endpoints</h3>
+                        <div class="project-meta">
+                            <span>📅 Sep 2024 - Abr 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Necesidad de actualizar 400 equipos a Windows 11 sin interrumpir servicios críticos de producción.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Definición de estrategia de despliegue por fases</li>
+                                    <li>Validación de compatibilidad de hardware y software</li>
+                                    <li>Coordinación con equipos de negocio y verificación post-migración</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Migración completada en plazo sin interrupciones</li>
+                                    <li>Zero impacto en servicios críticos</li>
+                                    <li>Entorno actualizado y seguro</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">PowerShell</span>
+                                <span class="result-badge">Microsoft Intune</span>
+                                <span class="result-badge">Windows 11</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="project-grid">
-                    <div class="detail-item">
-                        <h4>✅ Acción</h4>
-                        <ul>
-                            <li>Lideré la virtualización del ERP SAP en entorno productivo</li>
-                            <li>Migración de sistemas on-premise de alto riesgo a infraestructura moderna</li>
-                            <li>Migración de firewalls FortiGate sin interrupciones</li>
-                            <li>Rediseño de políticas de seguridad y segmentación de red</li>
-                        </ul>
+                <!-- PROYECTOS OCULTOS INICIALMENTE (RESTO) -->
+                <div id="hidden-projects" class="projects-hidden">
+                    <!-- Proyecto 4: Migración firewalls FortiGate -->
+                    <div class="project-card">
+                        <h3>🛡️ Migración e Ingeniería de Firewalls Perimetrales — FortiGate 250D → 120G</h3>
+                        <div class="project-meta">
+                            <span>📅 Oct 2024 - Mar 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Hardware obsoleto FortiGate 250D con necesidad de migración a nueva generación 120G sin downtime en producción.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Auditoría y depuración previa de políticas de seguridad complejas</li>
+                                    <li>Traducción de configuraciones NAT/objetos y enrutamiento estático/dinámico</li>
+                                    <li>Aseguramiento de túneles VPN activos durante la ventana de cambio</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Impacto cero de downtime en sistemas de producción</li>
+                                    <li>Seguridad perimetral modernizada y de alto rendimiento</li>
+                                    <li>Infraestructura preparada para futuros desafíos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">FortiGate</span>
+                                <span class="result-badge">Firewalls</span>
+                                <span class="result-badge">VPN</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <h4>📈 Resultado</h4>
-                        <ul>
-                            <li>Continuidad operativa sin impacto en negocio</li>
-                            <li>Reducción de superficie de ataque</li>
-                            <li>Mejora significativa en seguridad perimetral</li>
-                            <li>Infraestructura más resiliente y escalable</li>
-                        </ul>
+
+                    <!-- Proyecto 5: Automatización vulnerabilidades PingCastle -->
+                    <div class="project-card">
+                        <h3>🔒 Automatización Gestión de Vulnerabilidades con PingCastle</h3>
+                        <div class="project-meta">
+                            <span>📅 Nov 2024 - Dic 2024</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Revisión manual periódica de vulnerabilidades en Active Directory, lenta y propensa a errores.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Automatización del ciclo completo de gestión de vulnerabilidades detectadas por PingCastle</li>
+                                    <li>Ejecución programada de análisis y generación automática de reportes</li>
+                                    <li>Clasificación de hallazgos por criticidad y asignación de tareas correctivas</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación de revisión manual periódica</li>
+                                    <li>Respuesta sistemática y trazable a cada vulnerabilidad</li>
+                                    <li>Mejora continua de la postura de seguridad</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">PingCastle</span>
+                                <span class="result-badge">Active Directory</span>
+                                <span class="result-badge">PowerShell</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 6: Implementación Grafana -->
+                    <div class="project-card">
+                        <h3>📊 Implementación Grafana — Monitorización de KPIs y SLAs</h3>
+                        <div class="project-meta">
+                            <span>📅 Mar 2024 - Abr 2024</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Falta de visibilidad en tiempo real del estado de servicios y detección proactiva de degradaciones.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Diseño e implementación de dashboards en Grafana integrados con fuentes de datos críticas</li>
+                                    <li>Configuración de disparadores y alertas automáticas alineadas con umbrales de SLA</li>
+                                    <li>Reporting ejecutivo de disponibilidad y rendimiento</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Visibilidad en tiempo real del estado de servicios</li>
+                                    <li>Detección proactiva de degradaciones</li>
+                                    <li>Reporting ejecutivo automatizado</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Grafana</span>
+                                <span class="result-badge">System Monitoring</span>
+                                <span class="result-badge">KPIs/SLAs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 7: Modernización red inalámbrica -->
+                    <div class="project-card">
+                        <h3>📡 Modernización Red Inalámbrica Corporativa — Integración con Corporación</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2023 - Abr 2024</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Infraestructura WiFi desactualizada sin cumplir estándares de seguridad requeridos por la corporación matriz.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Rediseño de arquitectura WiFi y segmentación de VLANs</li>
+                                    <li>Implementación de políticas de acceso y autenticación</li>
+                                    <li>Integración con red corporativa global</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Conectividad segura y escalable</li>
+                                    <li>Cumplimiento de estándares de gobierno IT del grupo</li>
+                                    <li>WiFi corporativo moderno y alineado</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Wireless Networking</span>
+                                <span class="result-badge">Project Management</span>
+                                <span class="result-badge">VLANs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 8: Optimización líneas móviles -->
+                    <div class="project-card">
+                        <h3>📱 Optimización de Flota de Líneas Móviles Corporativas</h3>
+                        <div class="project-meta">
+                            <span>📅 Ago 2023 - Oct 2023</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Gasto elevado en telecomunicaciones móviles sin control sobre líneas en desuso o planes sobredimensionados.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Análisis de métricas reales de consumo y tráfico</li>
+                                    <li>Identificación de líneas en desuso y patrones de consumo anómalos</li>
+                                    <li>Recomendaciones de eliminación y renegociación de contratos</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Reducción directa del gasto en telecomunicaciones móviles</li>
+                                    <li>Alineación con uso real de la organización</li>
+                                    <li>Control total de la flota móvil</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Project Management</span>
+                                <span class="result-badge">MariaDB</span>
+                                <span class="result-badge">Optimización de Costes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 9: Virtualización completa VMware ESXi -->
+                    <div class="project-card">
+                        <h3>⚡ Virtualización Completa de Infraestructura On-Premise — VMware ESXi</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2021 - Mar 2021</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Infraestructura física sobredimensionada con 8 servidores, alto consumo energético y baja escalabilidad.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Consolidación de 8 servidores físicos a 3 hosts virtualizados VMware ESXi</li>
+                                    <li>Diseño de arquitectura de alta disponibilidad y recuperación ante desastres</li>
+                                    <li>Configuración de políticas de snapshots y backup</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Reducción del 60% en hardware físico</li>
+                                    <li>Mejora significativa en escalabilidad y disponibilidad</li>
+                                    <li>Agilidad operativa incrementada</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">VMware ESXi</span>
+                                <span class="result-badge">Windows Server</span>
+                                <span class="result-badge">Alta Disponibilidad</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 10: Implementación VoIP -->
+                    <div class="project-card">
+                        <h3>📞 Implementación VoIP con PBX Panasonic KX-TDE200</h3>
+                        <div class="project-meta">
+                            <span>📅 Ago 2020 - Sep 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Altos costes de llamadas entre oficinas y dependencia de líneas telefónicas independientes.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Implementación de telefonía VoIP con PBX Panasonic KX-TDE200</li>
+                                    <li>Centralización de comunicaciones entre oficina principal y sedes satelitales</li>
+                                    <li>Utilización de VPN Site-to-Site existente</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación de costes de llamadas entre oficinas</li>
+                                    <li>Reducción del 80% en factura telefónica corporativa</li>
+                                    <li>Extensiones internas sobre infraestructura IP</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">VoIP</span>
+                                <span class="result-badge">Panasonic</span>
+                                <span class="result-badge">VPN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 11: Interconexión de sedes VPN -->
+                    <div class="project-card">
+                        <h3>🔗 Interconexión de Sedes — VPN Site-to-Site</h3>
+                        <div class="project-meta">
+                            <span>📅 Mar 2020 - Jun 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Infraestructura fragmentada entre 3 oficinas, sin comunicación segura ni centralizada.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Diseño e implementación de interconexión de 3 oficinas mediante VPN Site-to-Site</li>
+                                    <li>Unificación de red corporativa bajo infraestructura segura</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación de dependencias de infraestructura fragmentada</li>
+                                    <li>Base para sistema VoIP y acceso centralizado a recursos compartidos</li>
+                                    <li>Red unificada y segura</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">VPN Site-to-Site</span>
+                                <span class="result-badge">Project Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 12: Sistema de control de accesos biométrico -->
+                    <div class="project-card">
+                        <h3>🆔 Implementación Sistema de Control de Accesos Biométrico</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2020 - May 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Control de accesos a zonas restringidas ineficiente y sin trazabilidad completa.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Implementación de sistema de control de accesos con tecnología biométrica</li>
+                                    <li>Integración con sistema de reporte visual y generación automática de logs</li>
+                                    <li>Envío de alertas en tiempo real al gerente de seguridad</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Control estricto de accesos a zonas restringidas</li>
+                                    <li>Trazabilidad completa de movimientos</li>
+                                    <li>Alertas en tiempo real ante eventos de seguridad</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Biometría</span>
+                                <span class="result-badge">System Monitoring</span>
+                                <span class="result-badge">Project Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 13: Upgrade GP10 a GP2015 y SQL -->
+                    <div class="project-card">
+                        <h3>🔄 Upgrade GP10 a GP2015 y SQL 2008 a SQL 2014</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2020 - Abr 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>ERP obsoleto con rendimiento degradado y necesidad de actualización sin pérdida de datos.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Liderazgo de actualización de Microsoft Dynamics GP 10 a GP 2015</li>
+                                    <li>Migración de SQL Server 2008 a SQL Server 2014</li>
+                                    <li>Conversión de esquemas complejos y pruebas de regresión</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Zero pérdida de información</li>
+                                    <li>Optimización del rendimiento general del ERP</li>
+                                    <li>Plataforma modernizada y escalable</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Microsoft Dynamics GP</span>
+                                <span class="result-badge">SQL Server</span>
+                                <span class="result-badge">Vendor Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 14: Migración AD Microsoft a Open Source -->
+                    <div class="project-card">
+                        <h3>🐧 Migración Infraestructura Active Directory Microsoft → Open Source</h3>
+                        <div class="project-meta">
+                            <span>📅 Jun 2017 - Nov 2017</span>
+                            <span>🏢 Stellionet C.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Altos costes de licenciamiento Microsoft Server y necesidad de mantener funcionalidades críticas.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Migración a OpenLDAP como directorio centralizado</li>
+                                    <li>Implementación de Samba, Bind9, CUPS, Ansible y Squid</li>
+                                    <li>Automatización y aplicación de políticas equivalentes a GPOs</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación de costes de licenciamiento Microsoft Server</li>
+                                    <li>Mantenimiento de funcionalidades críticas de directorio</li>
+                                    <li>Autenticación centralizada y gestión de políticas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">OpenLDAP</span>
+                                <span class="result-badge">Samba</span>
+                                <span class="result-badge">Ansible</span>
+                                <span class="result-badge">Linux</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 15: Implementación Microsoft Dynamics CRM -->
+                    <div class="project-card">
+                        <h3>📈 Implementación Microsoft Dynamics CRM — Grupo Custom 2013</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2013 - Jun 2013</span>
+                            <span>🏢 Grupo Custom C.A</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Procesos comerciales y de atención al cliente desintegrados de la gestión administrativa central.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Implementación de Microsoft Dynamics CRM como plataforma complementaria al ERP</li>
+                                    <li>Integración de procesos comerciales y de atención al cliente</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Visión unificada del cliente</li>
+                                    <li>Mejora en coordinación entre equipos comerciales y operativos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Microsoft Dynamics</span>
+                                <span class="result-badge">Digital Transformation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 16: Implementación Microsoft Dynamics GP -->
+                    <div class="project-card">
+                        <h3>💼 Implementación Microsoft Dynamics GP — Grupo Custom 2013</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2013 - Jun 2013</span>
+                            <span>🏢 Grupo Custom C.A</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>ERP DATAPRO obsoleto sin capacidad de escalabilidad para el crecimiento del negocio.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Migración de DATAPRO a Microsoft Dynamics GP</li>
+                                    <li>Gestión de migración de datos históricos y configuración de módulos operativos</li>
+                                    <li>Formación de 50 usuarios de la plataforma</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Modernización de gestión administrativa y financiera</li>
+                                    <li>Base tecnológica escalable para crecimiento del negocio</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Microsoft Dynamics GP</span>
+                                <span class="result-badge">Project Management</span>
+                                <span class="result-badge">Vendor Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 17: Aplicación web toma de contadores -->
+                    <div class="project-card">
+                        <h3>📊 Aplicación Web de Toma de Contadores con Integración API al CRM</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2012 - Dic 2012</span>
+                            <span>🏢 Grupo Custom C.A</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Registro manual de contadores de impresión en hojas de cálculo, ineficiente y propenso a errores.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Desarrollo e implantación de aplicación web para toma automatizada de contadores</li>
+                                    <li>Integración vía API con CRM Vtiger</li>
+                                    <li>Habilitación de reposición proactiva de consumibles basada en métricas de uso real</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Sustitución de registro manual en hojas de cálculo</li>
+                                    <li>Automatización de facturación de páginas excedentes</li>
+                                    <li>Mejora en gestión de consumibles y contratos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">API Integration</span>
+                                <span class="result-badge">Vtiger CRM</span>
+                                <span class="result-badge">Project Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 18: Implementación Vtiger CRM -->
+                    <div class="project-card">
+                        <h3>🏢 Implementación Vtiger CRM — Grupo Custom 2011</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2011 - Jul 2011</span>
+                            <span>🏢 Grupo Custom C.A</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Proceso manual de solicitudes, reportes de reparación e incidencias basado en hojas de cálculo, sin trazabilidad.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Diseño y puesta en marcha del Centro Integral de Atención al Cliente (CIAC) desde cero</li>
+                                    <li>Implementación de Vtiger CRM como plataforma de gestión</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Digitalización completa del proceso manual</li>
+                                    <li>Trazabilidad completa y tiempos de respuesta medibles</li>
+                                    <li>Base estructurada para gestión del servicio postventa</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Vtiger CRM</span>
+                                <span class="result-badge">Linux Server</span>
+                                <span class="result-badge">Project Management</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-results">
-                    <h4>🎯 Impacto Clave</h4>
-                    <div class="result-badges">
-                        <span class="result-badge">Zero Downtime</span>
-                        <span class="result-badge">Seguridad Mejorada</span>
-                        <span class="result-badge">Infraestructura Escalable</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROYECTO 2 -->
-            <div class="project-card">
-                <h3>🤖 Automatización y Optimización Operativa</h3>
-                
-                <div class="project-problem">
-                    <h4>⚠️ Problema</h4>
-                    <p>Alta carga de tareas manuales, procesos repetitivos y baja eficiencia operativa.</p>
-                </div>
-
-                <div class="project-grid">
-                    <div class="detail-item">
-                        <h4>✅ Acción</h4>
-                        <ul>
-                            <li>Desarrollo de automatizaciones con PowerShell y Bash</li>
-                            <li>Optimización de procesos administrativos y operativos</li>
-                            <li>Implementación de soluciones basadas en IA para toma de decisiones</li>
-                            <li>Automatización para planificación de recursos, auditorías y resolución predictiva</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>📈 Resultado</h4>
-                        <ul>
-                            <li>Reducción de tareas manuales en más del 70%</li>
-                            <li>Liberación del 20% de la capacidad del equipo</li>
-                            <li>Mejora significativa en eficiencia operativa</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project-results">
-                    <h4>🎯 Impacto Clave</h4>
-                    <div class="result-badges">
-                        <span class="result-badge">70% Menos Tareas Manuales</span>
-                        <span class="result-badge">20% Capacidad Liberada</span>
-                        <span class="result-badge">IA Integrada</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PROYECTO 3 -->
-            <div class="project-card">
-                <h3>📊 Monitorización Avanzada y Gestión de Incidencias</h3>
-                
-                <div class="project-problem">
-                    <h4>⚠️ Problema</h4>
-                    <p>Detección tardía de incidencias y tiempos de respuesta elevados.</p>
-                </div>
-
-                <div class="project-grid">
-                    <div class="detail-item">
-                        <h4>✅ Acción</h4>
-                        <ul>
-                            <li>Implementación de dashboards en Grafana y herramientas de monitorización avanzada</li>
-                            <li>Configuración de alertas proactivas</li>
-                            <li>Seguimiento mediante KPIs y SLAs</li>
-                            <li>Coordinación de equipo técnico (7 especialistas)</li>
-                        </ul>
-                    </div>
-                    <div class="detail-item">
-                        <h4>📈 Resultado</h4>
-                        <ul>
-                            <li>Reducción del MTTD en un 40%</li>
-                            <li>Disminución del tiempo de respuesta en un 60%</li>
-                            <li>SLA mantenido en 99.9% de uptime</li>
-                            <li>Mayor estabilidad y resiliencia del sistema</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project-results">
-                    <h4>🎯 Impacto Clave</h4>
-                    <div class="result-badges">
-                        <span class="result-badge">99.9% Uptime</span>
-                        <span class="result-badge">MTTD -40%</span>
-                        <span class="result-badge">Respuesta -60%</span>
-                    </div>
+                <!-- BOTÓN EXPANDIR/COLAPSAR -->
+                <div class="btn-wrapper">
+                    <button id="expand-projects-btn" class="expand-btn">
+                        <span>📂</span> Ver más proyectos (14 adicionales)
+                    </button>
                 </div>
             </div>
         </section>
@@ -1611,6 +2268,31 @@
                 }
             });
         });
+
+        // COLLAPSIBLE PROJECTS FUNCTIONALITY
+        const expandBtn = document.getElementById('expand-projects-btn');
+        const hiddenProjects = document.getElementById('hidden-projects');
+        let expanded = false;
+
+        if (expandBtn && hiddenProjects) {
+            expandBtn.addEventListener('click', function() {
+                if (!expanded) {
+                    hiddenProjects.classList.add('show');
+                    expandBtn.innerHTML = '<span>📁</span> Ver menos proyectos';
+                    expanded = true;
+                } else {
+                    hiddenProjects.classList.remove('show');
+                    expandBtn.innerHTML = '<span>📂</span> Ver más proyectos (14 adicionales)';
+                    expanded = false;
+                    
+                    // Smooth scroll back to projects section header after collapsing
+                    const projectsSection = document.getElementById('projects');
+                    if (projectsSection) {
+                        projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
