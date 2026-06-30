@@ -1,1 +1,2267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harvy Cassidy - Especialista en Administración de Sistemas en Red. Infraestructura IT, Seguridad, Automatización PowerShell, VMware, Active Directory, Linux.">
+    <meta name="keywords" content="Administrador Sistemas, Infraestructura IT, PowerShell, VMware, Active Directory, Linux, Automatización, Seguridad Redes, DevOps, SRE, ITIL, PM2">
+    <meta name="author" content="Harvy Cassidy">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Harvy Cassidy — Especialista en Sistemas e Infraestructura IT">
+    <meta property="og:description" content="Administrador de Sistemas en Red especializado en infraestructuras on-premise e híbridas, automatización y seguridad.">
+    <meta property="og:type" content="website">
+    <title>Harvy Cassidy — Especialista en Sistemas e Infraestructura IT | PowerShell | VMware | Active Directory</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f16;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --panel: #1f2937;
+            --panel-hover: #2d3748;
+            --accent: #22d3ee;
+            --accent2: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+            --text: #ffffff;
+            --text-dim: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(34, 211, 238, 0.4);
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-accent: 0 4px 20px rgba(34, 211, 238, 0.15);
+        }
 
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Poppins', sans-serif; 
+            display: flex; 
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* SIDEBAR */
+        .sidebar { 
+            width: 320px; 
+            background: linear-gradient(180deg, var(--bg2) 0%, var(--bg3) 100%); 
+            padding: 25px 20px; 
+            height: 100vh; 
+            position: fixed; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            border-right: 1px solid var(--border); 
+            overflow-y: auto; 
+            z-index: 100;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .profile-container { position: relative; margin-bottom: 12px; }
+        
+        .profile-pic { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 3px solid var(--accent); 
+            box-shadow: var(--shadow-accent);
+            transition: 0.3s;
+        }
+        
+        .profile-pic:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.4);
+        }
+
+        .status-badge { 
+            font-size: 10px; 
+            background: rgba(34, 211, 238, 0.15); 
+            color: var(--accent); 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            margin-bottom: 10px; 
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .name { 
+            font-size: 18px; 
+            font-weight: 700; 
+            text-align: center; 
+            color: var(--text); 
+            margin-bottom: 3px;
+        }
+
+        .sidebar-subtitle { 
+            color: var(--accent); 
+            font-size: 10px; 
+            margin-bottom: 8px; 
+            text-align: center; 
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1.3;
+        }
+
+        .location { 
+            color: var(--text-dim); 
+            font-size: 11px; 
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links { 
+            list-style: none; 
+            width: 100%; 
+            margin-bottom: 15px; 
+        }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-dim); 
+            font-size: 12px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px; 
+            border-radius: 6px; 
+            transition: all 0.3s; 
+            margin-bottom: 3px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover { 
+            background: var(--accent-gradient); 
+            color: var(--bg); 
+            transform: translateX(5px);
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            background: var(--panel);
+            color: var(--accent);
+            border: 1px solid var(--border-hover);
+        }
+
+        .contact-section { 
+            width: 100%; 
+            margin-top: auto; 
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-group { 
+            display: flex; 
+            flex-direction: column; 
+            width: 100%; 
+            gap: 8px; 
+        }
+
+        .btn { 
+            padding: 10px 12px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 11px; 
+            text-align: center; 
+            transition: all 0.3s; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-primary { 
+            background: var(--accent-gradient); 
+            color: var(--bg); 
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-primary:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(34, 211, 238, 0.3);
+        }
+
+        .btn-secondary { 
+            border: 1px solid var(--accent); 
+            color: var(--accent); 
+            background: transparent;
+        }
+
+        .btn-secondary:hover { 
+            background: rgba(34, 211, 238, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-cv {
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        .btn-cv:hover {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        /* HEADER IMAGE */
+        .header-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* MAIN CONTENT */
+        .main-content { 
+            margin-left: 320px; 
+            padding: 40px 60px; 
+            width: calc(100% - 320px); 
+            max-width: 1400px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        section { 
+            margin-bottom: 70px; 
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+        section:nth-child(8) { animation-delay: 0.8s; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 { 
+            font-size: 24px; 
+            color: var(--text); 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 700;
+        }
+
+        h2 span { color: var(--accent); }
+
+        .section-line { 
+            flex: 1; 
+            height: 2px; 
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            opacity: 0.5;
+        }
+
+        h3 { 
+            font-size: 16px; 
+            color: var(--text); 
+            margin: 20px 0 12px; 
+            border-left: 4px solid var(--accent); 
+            padding-left: 10px;
+            font-weight: 600;
+        }
+
+        p { 
+            font-size: 14px; 
+            line-height: 1.7; 
+            color: var(--text-dim); 
+            margin-bottom: 15px;
+        }
+
+        .highlight { color: var(--accent); font-weight: 600; }
+
+        /* EXPERIENCE SECTION */
+        .experience-card {
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%);
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .experience-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .experience-title h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--accent);
+            border: none;
+            padding: 0;
+        }
+
+        .experience-company {
+            font-size: 14px;
+            color: var(--text);
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        .experience-location {
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .experience-period {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .experience-achievements {
+            margin-top: 20px;
+        }
+
+        .experience-achievements h4 {
+            font-size: 13px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .experience-achievements ul {
+            list-style: none;
+        }
+
+        .experience-achievements li {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .experience-achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .experience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .experience-tag {
+            background: rgba(34, 211, 238, 0.08);
+            color: var(--text-dim);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* METRIC CARDS */
+        .metrics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 18px; 
+            margin-top: 25px; 
+        }
+
+        .metric-card { 
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%); 
+            padding: 20px 15px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            text-align: center; 
+            transition: all 0.3s; 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover { 
+            border-color: var(--accent); 
+            transform: translateY(-6px); 
+            box-shadow: var(--shadow-accent);
+        }
+
+        .metric-card:hover::before { transform: scaleX(1); }
+
+        .metric-val { 
+            display: block; 
+            font-size: 28px; 
+            font-weight: 700; 
+            color: var(--accent); 
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        .metric-label { 
+            font-size: 10px; 
+            color: var(--text-dim); 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px; 
+            margin-top: 6px;
+            display: block;
+        }
+
+        .metric-context {
+            display: block;
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        /* Impact Section Specific */
+        .impact-intro {
+            font-size: 14px;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+            padding: 18px 20px;
+            background: rgba(34, 211, 238, 0.05);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .impact-summary {
+            margin-top: 35px;
+            padding: 25px;
+            background: linear-gradient(145deg, var(--bg2) 0%, var(--bg3) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .impact-summary h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: var(--text);
+            border: none;
+            padding: 0;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .impact-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 18px;
+            background: var(--panel);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .impact-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+        }
+
+        .impact-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .impact-item strong {
+            display: block;
+            color: var(--text);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .impact-item p {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* SKILLS TAGS */
+        .skills-container { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; 
+        }
+
+        .skill-box { 
+            background: var(--bg2); 
+            padding: 20px; 
+            border-radius: 10px; 
+            border: 1px solid var(--border); 
+            transition: all 0.3s;
+        }
+
+        .skill-box:hover { 
+            border-color: var(--border-hover); 
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .skill-box h3 { 
+            margin-top: 0; 
+            font-size: 15px;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .skill-tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+            margin-top: 12px; 
+        }
+
+        .tag { 
+            background: rgba(34, 211, 238, 0.08); 
+            color: var(--text-dim); 
+            padding: 5px 12px; 
+            border-radius: 5px; 
+            font-size: 11px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .tag:hover { 
+            border-color: var(--accent); 
+            color: var(--accent); 
+            background: rgba(34, 211, 238, 0.15);
+            transform: scale(1.05);
+        }
+
+        .tag.featured {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            font-weight: 600;
+            border: none;
+        }
+
+        /* PROJECTS */
+        .project-card { 
+            background: linear-gradient(145deg, var(--panel) 0%, var(--bg3) 100%); 
+            padding: 28px; 
+            border-radius: 14px; 
+            border: 1px solid var(--border); 
+            margin-bottom: 25px; 
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        .project-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 8px;
+        }
+
+        .project-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .project-problem {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 18px;
+        }
+
+        .project-problem h4 {
+            color: #ef4444;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .project-problem p {
+            font-size: 12px;
+            margin: 0;
+            color: var(--text-dim);
+        }
+
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px; 
+            margin-top: 18px; 
+        }
+
+        .detail-item h4 { 
+            font-size: 12px; 
+            color: var(--accent); 
+            text-transform: uppercase; 
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .detail-item ul { 
+            list-style: none; 
+            font-size: 13px; 
+            color: var(--text-dim); 
+        }
+
+        .detail-item li { 
+            margin-bottom: 8px; 
+            position: relative; 
+            padding-left: 18px;
+            line-height: 1.5;
+        }
+
+        .detail-item li::before { 
+            content: '▸'; 
+            position: absolute; 
+            left: 0; 
+            color: var(--accent); 
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .project-results {
+            background: rgba(34, 211, 238, 0.05);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 18px;
+        }
+
+        .project-results h4 {
+            color: var(--accent);
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .result-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .result-badge {
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        /* COLLAPSIBLE PROJECTS SECTION */
+        .projects-container {
+            position: relative;
+        }
+
+        .projects-hidden {
+            display: none;
+        }
+
+        .projects-hidden.show {
+            display: block;
+        }
+
+        .expand-btn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto 0;
+            width: auto;
+            backdrop-filter: blur(4px);
+        }
+
+        .expand-btn:hover {
+            background: var(--accent-gradient);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* METHODOLOGY */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .method-card {
+            background: var(--bg2);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .method-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .method-card h4 {
+            color: var(--accent);
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .method-card p {
+            font-size: 12px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* EDUCATION */
+        .education-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .education-item {
+            background: var(--bg2);
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .education-item:hover {
+            border-color: var(--border-hover);
+            transform: translateX(5px);
+        }
+
+        .education-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .education-info h4 {
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .education-info p {
+            color: var(--text-dim);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* FOOTER QUOTE */
+        .footer-quote {
+            background: var(--accent-gradient);
+            padding: 35px;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: var(--shadow-accent);
+        }
+
+        .footer-quote p {
+            color: var(--bg);
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .sidebar { width: 280px; }
+            .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 35px 40px; }
+        }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                height: auto; 
+                position: relative; 
+                border-right: none; 
+                border-bottom: 1px solid var(--border);
+                padding: 20px 15px;
+            }
+            .main-content { 
+                margin-left: 0; 
+                width: 100%; 
+                padding: 30px 20px; 
+            }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .nav-links a { padding: 8px 12px; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-container { grid-template-columns: 1fr; }
+            .method-grid { grid-template-columns: repeat(2, 1fr); }
+            .impact-grid { grid-template-columns: repeat(2, 1fr); }
+            .experience-header { flex-direction: column; gap: 10px; }
+            .experience-period { width: 100%; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            .header-image { max-height: 200px; object-fit: cover; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .skills-container { grid-template-columns: 1fr; }
+            .project-grid { grid-template-columns: 1fr; }
+            .method-grid { grid-template-columns: 1fr; }
+            .impact-grid { grid-template-columns: 1fr; }
+            h2 { font-size: 20px; }
+            .main-content { padding: 25px 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .metric-val { font-size: 24px; }
+            .btn-group { gap: 6px; }
+            .footer-quote { padding: 20px; }
+            .footer-quote p { font-size: 14px; }
+        }
+
+        /* Print Styles for ATS */
+        @media print {
+            .sidebar { position: static; width: 100%; height: auto; }
+            .main-content { margin-left: 0; width: 100%; }
+            body { display: block; }
+            .nav-links, .btn-group, .header-image { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile-container">
+            <img src="../profile.jpg" alt="Harvy Cassidy - Especialista en Sistemas" class="profile-pic">
+        </div>
+        
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            <span>Abierto a oportunidades</span>
+        </div>
+        
+        <h1 class="name">Harvy Cassidy</h1>
+        <div class="sidebar-subtitle">Especialista en Administración de Sistemas en Red</div>
+        <div class="location">📍 España | Disponible</div>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about"><span>🧠</span> Propuesta de Valor</a></li>
+                <li><a href="#experience"><span>💼</span> Experiencia Laboral</a></li>
+                <li><a href="#impact"><span>🚀</span> Impacto en Negocio</a></li>
+                <li><a href="#skills"><span>🧩</span> Especialización Técnica</a></li>
+                <li><a href="#projects"><span>🏗️</span> Proyectos Estratégicos</a></li>
+                <li><a href="#method"><span>📋</span> Metodología TI</a></li>
+                <li><a href="#education"><span>🎓</span> Formación</a></li>
+                <li><a href="#contact"><span>📬</span> Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="contact-section">
+            <div class="btn-group">
+                <a href="mailto:hgcassidy@gmail.com" class="btn btn-primary">
+                    <span>📧</span> hgcassidy@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="../CV Harvy Cassidy TECH.pdf" class="btn btn-secondary btn-cv" download>
+                    <span>📥</span> Descargar CV (PDF)
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- HEADER IMAGE -->
+        <img src="../header.png" alt="Harvy Cassidy - Header" class="header-image">
+
+        <!-- PROPUESTA DE VALOR -->
+        <section id="about">
+            <div class="section-header">
+                <h2><span>🧠</span> Propuesta de Valor</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <p>
+                <strong>Administrador de Sistemas Informáticos en Red</strong> con más de <span class="highlight">15 años</span> de experiencia liderando, diseñando y gestionando infraestructuras IT corporativas complejas y críticas de alcance multi-sede, operando sobre entornos híbridos (On-Premise, Azure, M365), plataformas virtualizadas <span class="highlight">(VMware ESXi/Hyper-V)</span> y entornos Microsoft/Linux.
+            </p>
+            
+            <p>
+                Especializado en la optimización operativa mediante la automatización de procesos clave e infraestructuras con <span class="highlight">PowerShell, Bash y Power Automate</span>, logrando reducciones drásticas del MTTD y eliminando tareas manuales repetitivas. Gracias a mi formación sólida en gobernanza de proyectos <span class="highlight">(PM²)</span> y de servicios <span class="highlight">(ITIL)</span>, garantizo una entrega estructurada alineada por completo con la ciberseguridad, la alta disponibilidad y los objetivos estratégicos del negocio.
+            </p>
+
+            <h3>Mi Enfoque - 4 Pilares Fundamentales</h3>
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>⚙️ Automatización</h3>
+                    <p>Reducir carga operativa, auditorías AD continuas y mitigar errores humanos mediante scripting avanzado con PowerShell/Bash.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>🔐 Seguridad & Hardening</h3>
+                    <p>Proteger la infraestructura crítica perimetral y de endpoints mediante firewalls de última generación, VLANs, VPNs y políticas robustas de accesos mínimos.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>📊 Optimización Continuada</h3>
+                    <p>Maximizar el rendimiento y la disponibilidad de sistemas mediante monitorización inteligente proactiva (Grafana/Checkmk) y tuning de recursos.</p>
+                </div>
+                <div class="skill-box">
+                    <h3>📋 Gestión y Gobernanza IT</h3>
+                    <p>Planificación de arquitectura, despliegues complejos y control estricto de contingencias mediante métricas KPIs, SLAs y metodologías ágiles.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCIA LABORAL -->
+        <section id="experience">
+            <div class="section-header">
+                <h2><span>💼</span> Experiencia Laboral</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Administrador de Sistemas Senior</h3>
+                        <div class="experience-company">Inerza - Inetel (Compañía Cervecera de Canarias)</div>
+                        <div class="experience-location">📍 Tenerife, España</div>
+                    </div>
+                    <div class="experience-period">03/2022 - 10/2025</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>📋 Responsabilidades y Logros</h4>
+                    <ul>
+                        <li><strong>Gestión de Infraestructura Crítica:</strong> Administración y mantenimiento de plataforma VMware ESXi con alta disponibilidad (HA), gestionando eficientemente un parque informático corporativo de 60 servidores virtuales y físicos (Windows/Linux) con un <span class="highlight">SLA garantizado del 99,9%</span>.</li>
+                        <li><strong>Entornos Microsoft y Servicios Corporativos:</strong> Administración integral de Windows Server y endpoints Windows 11. Gestión centralizada de Active Directory (AD), DNS, DHCP y políticas de grupo (GPO) para control de usuarios y hardening de seguridad perimetral.</li>
+                        <li><strong>Mensajería y Entornos Híbridos:</strong> Gestión integral de Exchange Server local e híbrido con Microsoft 365, administrando buzones, cuotas, enrutamientos y grupos de distribución avanzados.</li>
+                        <li><strong>Backup y Continuidad:</strong> Implementación y supervisión de soluciones de backup y recuperación ante desastres (DR) utilizando Commvault y Veritas Backup Exec, asegurando la integridad, retención y recuperabilidad de datos críticos frente a contingencias masivas.</li>
+                        <li><strong>Automatización Operativa:</strong> Programación y automatización de auditorías de Active Directory mediante PowerShell, eliminando procesos manuales recurrentes, generando reportes de cumplimiento mensual y <span class="highlight">reduciendo el tiempo de gestión en un 40%</span>.</li>
+                        <li><strong>Monitorización Inteligente:</strong> Implementación de cuadros de mando centralizados y proactivos en Grafana y Checkmk con webhooks automatizados hacia MS Teams para notificaciones en tiempo real, <span class="highlight">reduciendo el MTTD (Mean Time to Detect) en un 40%</span>.</li>
+                        <li><strong>Gestión Multi-sede:</strong> Administración de infraestructura interconectando sedes en islas Canarias y dos plantas industriales complejas en La Dorada, gestionando réplicas de VMs en Hyper-V para failover y disaster recovery estratégico.</li>
+                        <li><strong>Soporte Funcional y Proyectos:</strong> Coordinación técnica y soporte de nivel avanzado sobre flujos de datos ERP/CRM (Microsoft Dynamics). Liderazgo de la migración de plataforma ITSM desde GLPI hacia ServiceNow, depurando bases de datos mediante consultas SQL optimizadas sin interrupciones del servicio.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">VMware ESXi</span>
+                    <span class="experience-tag">Windows Server</span>
+                    <span class="experience-tag">Windows 11</span>
+                    <span class="experience-tag">Active Directory / GPO</span>
+                    <span class="experience-tag">Exchange Server</span>
+                    <span class="experience-tag">Microsoft 365</span>
+                    <span class="experience-tag">PowerShell</span>
+                    <span class="experience-tag">Commvault</span>
+                    <span class="experience-tag">Veritas Backup Exec</span>
+                    <span class="experience-tag">FortiGate</span>
+                    <span class="experience-tag">Grafana / Checkmk</span>
+                    <span class="experience-tag">ServiceNow</span>
+                    <span class="experience-tag">Microsoft Dynamics</span>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Gerente de Tecnología / Administrador de Infraestructura</h3>
+                        <div class="experience-company">Inversiones Voltaire</div>
+                        <div class="experience-location">📍 España / Nacional</div>
+                    </div>
+                    <div class="experience-period">05/2019 - 09/2021</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>📋 Responsabilidades y Logros</h4>
+                    <ul>
+                        <li><strong>Administración Multiplataforma:</strong> Dirección y control técnico de entornos virtuales combinados VMware/Hyper-V y servicios esenciales de Windows Server, Active Directory y Exchange para una organización compleja de alcance nacional.</li>
+                        <li><strong>Seguridad Corporativa:</strong> Gestión integral de la seguridad perimetral, túneles VPN, segmentación y administración centralizada de políticas de protección de endpoints/antivirus corporativos en entornos empresariales.</li>
+                        <li><strong>Automatización y Backup:</strong> Dirección de proyectos de automatización operativa de tareas repetitivas mediante scripts en PowerShell y flujos en Power Automate, reduciendo drásticamente la intervención manual. Diseño estricto de estrategias y ventanas de backup/DR.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">VMware</span>
+                    <span class="experience-tag">Hyper-V</span>
+                    <span class="experience-tag">Windows Server</span>
+                    <span class="experience-tag">Active Directory</span>
+                    <span class="experience-tag">PowerShell</span>
+                    <span class="experience-tag">Power Automate</span>
+                    <span class="experience-tag">Seguridad Corporativa</span>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Coordinador de Infraestructura IT</h3>
+                        <div class="experience-company">STELLIONET, C.A.</div>
+                        <div class="experience-location">📍 Internacional</div>
+                    </div>
+                    <div class="experience-period">10/2014 - 04/2019</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>📋 Responsabilidades y Logros</h4>
+                    <ul>
+                        <li><strong>Despliegue Crítico:</strong> Responsable directo de la instalación, aprovisionamiento y mantenimiento de infraestructuras críticas: servidores corporativos, networking avanzado, almacenamiento centralizado Dell EMC SAN y cabinas TrueNAS, coordinando proveedores y equipos.</li>
+                        <li><strong>Seguridad y Redes:</strong> Virtualización de servidores físicos con VMware ESXi bajo esquemas de alta disponibilidad. Administración de Directores Activos multi-sede y segmentación estricta de tráfico crítico mediante VLANs aisladas y firewalls.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">VMware ESXi</span>
+                    <span class="experience-tag">Dell EMC SAN</span>
+                    <span class="experience-tag">TrueNAS</span>
+                    <span class="experience-tag">Networking Cisco</span>
+                    <span class="experience-tag">VLAN / VPN</span>
+                </div>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">
+                        <h3>Gerente de Tecnología / Líder de Proyecto ERP</h3>
+                        <div class="experience-company">GRUPO CUSTOM</div>
+                        <div class="experience-location">📍 Internacional</div>
+                    </div>
+                    <div class="experience-period">07/2010 - 08/2014</div>
+                </div>
+
+                <div class="experience-achievements">
+                    <h4>📋 Responsabilidades y Logros</h4>
+                    <ul>
+                        <li><strong>Implantación Estratégica:</strong> Dirección completa del ciclo de vida en la implantación técnica y migración hacia plataformas Microsoft Dynamics y CRM Vtiger, liderando equipos multidisciplinares bajo control estricto de tiempos y presupuestos.</li>
+                        <li><strong>Soporte de Plataforma:</strong> Administración de infraestructura Windows Server, Active Directory y Exchange Server para soporte integral a flujos críticos de operaciones logísticas, contabilidad y negocio.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-tags">
+                    <span class="experience-tag">Microsoft Dynamics</span>
+                    <span class="experience-tag">Vtiger CRM</span>
+                    <span class="experience-tag">Windows Server</span>
+                    <span class="experience-tag">SQL Server</span>
+                    <span class="experience-tag">Implantación ERP</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMPACTO EN NEGOCIO -->
+        <section id="impact">
+            <div class="section-header">
+                <h2><span>🚀</span> Impacto Real en Negocio</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <p class="impact-intro">
+                Durante mi trayectoria profesional, he transformado indicadores técnicos en resultados de negocio medibles. Estos KPIs reflejan el impacto generado en entornos de <strong>alta criticidad operativa</strong>:
+            </p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-val">99.9%</span>
+                    <span class="metric-label">Disponibilidad Sistemas Críticos</span>
+                    <span class="metric-context">SLA mantenido consistentemente en servidores</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">70%</span>
+                    <span class="metric-label">Reducción Tareas Manuales</span>
+                    <span class="metric-context">Mediante automatización PowerShell/Bash</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">60%</span>
+                    <span class="metric-label">Reducción en Hardware Físico</span>
+                    <span class="metric-context">Consolidación de centros de datos mediante virtualización</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">40%</span>
+                    <span class="metric-label">↓ MTTD y Tiempos de Gestión</span>
+                    <span class="metric-context">Con monitorización avanzada y auditorías automatizadas</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">20%</span>
+                    <span class="metric-label">Capacidad Operativa Liberada</span>
+                    <span class="metric-context">Para proyectos estratégicos vs. mantenimiento reactivo</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-val">700+</span>
+                    <span class="metric-label">Endpoints Migrados</span>
+                    <span class="metric-context">Actualización masiva controlada a Windows 11</span>
+                </div>
+            </div>
+
+            <div class="impact-summary">
+                <h3>📊 Traducción a Valor de Negocio</h3>
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <span class="impact-icon">💰</span>
+                        <div>
+                            <strong>Reducción de Costes Operativos</strong>
+                            <p>Menos horas hombre invertidas en tareas repetitivas = mayor ROI y productividad del equipo IT.</p>
+                        </div>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">🛡️</span>
+                        <div>
+                            <strong>Continuidad del Negocio</strong>
+                            <p>Estrategias proactivas de DR y clustering de alta disponibilidad = protección ante paradas críticas.</p>
+                        </div>
+                    </div>
+                    <div class="impact-item">
+                        <span class="impact-icon">📈</span>
+                        <div>
+                            <strong>Escalabilidad e Innovación</strong>
+                            <p>Liberación de capacidad operativa = infraestructura y equipo preparados para asumir transformación digital.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESPECIALIZACIÓN TÉCNICA -->
+        <section id="skills">
+            <div class="section-header">
+                <h2><span>🧩</span> Especialización Técnica</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>💻 Sistemas Operativos</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Windows Server</span>
+                        <span class="tag featured">Windows 11</span>
+                        <span class="tag">Linux (Ubuntu/CentOS)</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🌐 Redes y Seguridad</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Firewalls FortiGate</span>
+                        <span class="tag">Routers y Switches Cisco</span>
+                        <span class="tag">VLANs</span>
+                        <span class="tag">VPNs Site-to-Site</span>
+                        <span class="tag">DNS / DHCP</span>
+                        <span class="tag">NAT</span>
+                        <span class="tag">Hardening de Sistemas</span>
+                        <span class="tag">Antivirus Corporativos</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🖥️ Directory Services & Identidad</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Active Directory</span>
+                        <span class="tag">Políticas GPO</span>
+                        <span class="tag">ADFS</span>
+                        <span class="tag">OpenLDAP</span>
+                        <span class="tag">Samba</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🖥️ Virtualización y Alta Disponibilidad</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">VMware ESXi</span>
+                        <span class="tag featured">vCenter HA</span>
+                        <span class="tag">Microsoft Hyper-V</span>
+                        <span class="tag">Failover Clustering</span>
+                        <span class="tag">Entornos Híbridos</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>⚙️ Automatización & Scripting</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">PowerShell</span>
+                        <span class="tag featured">Bash</span>
+                        <span class="tag">Power Automate</span>
+                        <span class="tag">Ansible</span>
+                        <span class="tag">APIs REST/JSON</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>📊 Monitorización y Análisis</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Grafana</span>
+                        <span class="tag">Checkmk</span>
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Métricas KPIs/SLAs</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🗄️ Backup, DR y Almacenamiento</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Commvault</span>
+                        <span class="tag">Veritas Backup Exec</span>
+                        <span class="tag">Estrategias DR Plan</span>
+                        <span class="tag">Dell EMC SAN</span>
+                        <span class="tag">TrueNAS</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🛠️ ERP, CRM y Gestión de Servicios</h3>
+                    <div class="skill-tags">
+                        <span class="tag">ServiceNow</span>
+                        <span class="tag">GLPI</span>
+                        <span class="tag">Microsoft Dynamics (NAV/GP)</span>
+                        <span class="tag">SAP Basis (Intermedio)</span>
+                        <span class="tag">Vtiger CRM</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🗄️ Mensajería y Bases de Datos</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Exchange Server (Local/Híbrido)</span>
+                        <span class="tag">Microsoft 365</span>
+                        <span class="tag">MS SQL Server</span>
+                        <span class="tag">MariaDB / MySQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>🧠 Gestión de Proyectos y Calidad</h3>
+                    <div class="skill-tags">
+                        <span class="tag featured">Metodología PM²</span>
+                        <span class="tag">ITIL Foundation</span>
+                        <span class="tag">Agile / Scrum / Kanban</span>
+                        <span class="tag">Gestión de Crisis (Apollo 13)</span>
+                        <span class="tag">IA Generativa TI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS ESTRATÉGICOS - CON COLLAPSE -->
+        <section id="projects">
+            <div class="section-header">
+                <h2><span>🏗️</span> Proyectos Estratégicos</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="projects-container">
+                <!-- PROYECTOS VISIBLES SIEMPRE (PRIMEROS 3 MÁS RECIENTES) -->
+                <div id="visible-projects">
+                    <!-- Proyecto 1: Automatización Active Directory -->
+                    <div class="project-card">
+                        <h3>🔐 Automatización Auditoría Active Directory con PowerShell</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2023 - Ago 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Riesgo de exposición por cuentas de administrador, servicio y contratistas no gestionadas adecuadamente, con permisos excesivos y falta de auditoría continua.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Desarrollo de automatizaciones PowerShell para auditoría continua de Active Directory.</li>
+                                    <li>Generación de reportes periódicos detectando cuentas inactivas o con permisos excesivos.</li>
+                                    <li>Disparo automático de alertas al equipo de seguridad.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Reducción del riesgo de exposición por credenciales no gestionadas.</li>
+                                    <li>Cumplimiento garantizado de políticas de acceso mínimo y auditoría continua 24/7.</li>
+                                    <li>Reducción del 40% en tiempos de gestión manual de administración de identidades.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">PowerShell</span>
+                                <span class="result-badge">Active Directory</span>
+                                <span class="result-badge">Auditoría Automatizada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 2: Migración GLPI → ServiceNow -->
+                    <div class="project-card">
+                        <h3>🔄 Migración GLPI → ServiceNow — ITSM Corporativo</h3>
+                        <div class="project-meta">
+                            <span>📅 Jul 2024 - Abr 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Plataforma GLPI heredada con serias limitaciones de trazabilidad, reporting y gestión avanzada de flujos de trabajo e incidentes bajo SLAs estrictos.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Coordinación de la migración completa del histórico de tickets estructurando la base de datos mediante consultas SQL.</li>
+                                    <li>Redefinición integral de los flujos de incidentes y requerimientos.</li>
+                                    <li>Gestión de la CMDB de activos IT y capacitación del equipo de soporte.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Elevada visibilidad operativa, trazabilidad y automatización del reporting ejecutivo.</li>
+                                    <li>Optimización significativa en los tiempos de resolución y cumplimiento de SLAs.</li>
+                                    <li>Establecimiento de una plataforma moderna ITSM de nivel Enterprise.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">ServiceNow</span>
+                                <span class="result-badge">ITSM Flujos</span>
+                                <span class="result-badge">SQL Queries</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 3: Migración Windows 10 → Windows 11 -->
+                    <div class="project-card">
+                        <h3>🖥️ Migración Masiva Windows 10 → Windows 11 — 700 Endpoints</h3>
+                        <div class="project-meta">
+                            <span>📅 Sep 2024 - Jun 2026</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Necesidad urgente de actualizar y asegurar el parque de equipos corporativos obsoletos sin interrumpir operaciones críticas ni flujos de producción industrial del negocio.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Planificación y despliegue masivo y controlado de Windows 11 estructurado por fases críticas.</li>
+                                    <li>Auditoría previa y validación estricta de compatibilidad de hardware/software.</li>
+                                    <li>Configuración de GPOs específicas de seguridad y optimización para el nuevo entorno.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Migración masiva de 700 endpoints completada con éxito en los plazos previstos.</li>
+                                    <li>Impacto cero de interrupción operativa en servicios e industrias críticas de la compañía.</li>
+                                    <li>Estandarización y endurecimiento de la seguridad del parque informático.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Windows 11</span>
+                                <span class="result-badge">GPO Deployment</span>
+                                <span class="result-badge">Planificación IT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROYECTOS OCULTOS INICIALMENTE (RESTO DE LOS 18 PROYECTOS) -->
+                <div id="hidden-projects" class="projects-hidden">
+                    <!-- Proyecto 4: Migración firewalls FortiGate -->
+                    <div class="project-card">
+                        <h3>🛡️ Migración e Ingeniería de Firewalls Perimetrales — FortiGate 250D → 120G</h3>
+                        <div class="project-meta">
+                            <span>📅 Oct 2024 - Mar 2025</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Hardware obsoleto FortiGate 250D con necesidad de migración a nueva generación de alto rendimiento 120G sin ocasionar caídas en producción.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Auditoría y depuración previa de políticas de seguridad, objetos y enrutamientos estáticos/dinámicos.</li>
+                                    <li>Traducción técnica de configuraciones complejas NAT y reglas complejas.</li>
+                                    <li>Aseguramiento proactivo de túneles VPN activos durante la ventana de mantenimiento nocturna.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Impacto cero de downtime en los sistemas corporativos e industriales durante el cambio.</li>
+                                    <li>Seguridad perimetral totalmente modernizada y con alto rendimiento de inspección de tráfico.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">FortiGate 120G</span>
+                                <span class="result-badge">VPN / Routing</span>
+                                <span class="result-badge">Hardening</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 5: Automatización vulnerabilidades PingCastle -->
+                    <div class="project-card">
+                        <h3>🔒 Automatización Gestión de Vulnerabilidades con PingCastle</h3>
+                        <div class="project-meta">
+                            <span>📅 Nov 2024 - Dic 2024</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Revisión manual, lenta y reactiva de los reportes y vulnerabilidades críticas de Active Directory.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Automatización del ciclo mediante scripts PowerShell y ejecución programada del motor PingCastle.</li>
+                                    <li>Análisis automático y filtrado inteligente de hallazgos por criticidad de seguridad.</li>
+                                    <li>Generación de reportes limpios y asignación directa de alertas/tareas correctivas.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación de la sobrecarga por revisiones e inspecciones manuales periódicas.</li>
+                                    <li>Respuesta sistemática, rápida y trazable ante debilidades en la postura de identidad corporativa.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">PingCastle</span>
+                                <span class="result-badge">PowerShell</span>
+                                <span class="result-badge">AD Hardening</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 6: Implementación Grafana -->
+                    <div class="project-card">
+                        <h3>📊 Implementación Grafana — Monitorización de KPIs y SLAs</h3>
+                        <div class="project-meta">
+                            <span>📅 Mar 2024 - Abr 2024</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Falta de visibilidad centralizada y en tiempo real del rendimiento de servicios de infraestructura IT y detección tardía de caídas.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Diseño e integración de dashboards avanzados de Grafana conectados a Checkmk y logs clave.</li>
+                                    <li>Configuración de umbrales inteligentes y disparadores de alertas críticas asociadas a SLAs corporativos.</li>
+                                    <li>Definición de dashboards ejecutivos limpios para reporte de disponibilidad.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Visibilidad completa 360° en tiempo real del estado de los servicios.</li>
+                                    <li>Reducción verificada del MTTD en un 40% permitiendo actuar proactivamente antes de la afectación al usuario.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Grafana</span>
+                                <span class="result-badge">Checkmk</span>
+                                <span class="result-badge">Proactive Alerts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 7: Modernización red inalámbrica -->
+                    <div class="project-card">
+                        <h3>📡 Modernización Red Inalámbrica Corporativa — Integración Global</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2023 - Abr 2024</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Infraestructura WiFi heredada obsoleta que no cumplía con las directrices de seguridad e integración de la corporación matriz.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Rediseño de la arquitectura inalámbrica implementando segmentación robusta de redes de datos vía VLANs.</li>
+                                    <li>Definición de políticas estrictas de autenticación corporativa y control de accesos de invitados.</li>
+                                    <li>Dirección del despliegue físico y lógico en las distintas dependencias.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Conectividad inalámbrica segura, estable y altamente escalable en todas las sedes.</li>
+                                    <li>Cumplimiento riguroso del 100% de los estándares de gobierno y gobernanza IT corporativa exigidos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Wireless LAN</span>
+                                <span class="result-badge">VLAN Isolation</span>
+                                <span class="result-badge">IT Governance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 8: Optimización líneas móviles -->
+                    <div class="project-card">
+                        <h3>📱 Optimización de Flota de Líneas Móviles Corporativas</h3>
+                        <div class="project-meta">
+                            <span>📅 Ago 2023 - Oct 2023</span>
+                            <span>🏢 INERZA, S.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Gasto mensual excesivo y descontrolado en telecomunicaciones móviles debido a líneas en desuso y planes sobredimensionados.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Análisis masivo de métricas de consumo y tráfico utilizando scripts y bases de datos MariaDB.</li>
+                                    <li>Identificación analítica de patrones de consumo anómalos y líneas inactivas o sin uso real.</li>
+                                    <li>Elaboración del reporte ejecutivo para cancelación de servicios y renegociación de contratos con proveedores.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Reducción directa y drástica del gasto operativo mensual en la flota móvil corporativa.</li>
+                                    <li>Alineación total del inventario de comunicaciones con las necesidades reales de los empleados.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">MariaDB Data</span>
+                                <span class="result-badge">Cost Optimization</span>
+                                <span class="result-badge">Telecom Audit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 9: Virtualización completa VMware ESXi -->
+                    <div class="project-card">
+                        <h3>⚡ Virtualización Completa de Infraestructura On-Premise — VMware ESXi</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2021 - Mar 2021</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Infraestructura física ineficiente compuesta por 8 servidores independientes, con altos costes energéticos, baja escalabilidad y nula tolerancia a fallos.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Consolidación física migrando los servidores hacia 3 hosts virtualizados robustos con VMware ESXi.</li>
+                                    <li>Diseño de la topología de almacenamiento acoplado, clúster vCenter y políticas de alta disponibilidad (HA).</li>
+                                    <li>Configuración centralizada de estrategias de snapshots automatizados y respaldos integrales.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Reducción masiva del 60% en costos de hardware físico y consumo de energía en el data center.</li>
+                                    <li>Incremento radical en la escalabilidad y disponibilidad ante caídas de hardware (failover automático).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">VMware ESXi</span>
+                                <span class="result-badge">vCenter HA</span>
+                                <span class="result-badge">Consolidación</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 10: Implementación VoIP -->
+                    <div class="project-card">
+                        <h3>📞 Implementación VoIP con PBX Panasonic KX-TDE200</h3>
+                        <div class="project-meta">
+                            <span>📅 Ago 2020 - Sep 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Costes de llamadas elevados entre oficinas y dependencias debido a sistemas analógicos independientes descodificados.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Despliegue y configuración de centralita IP con la plataforma PBX Panasonic KX-TDE200.</li>
+                                    <li>Centralización de los canales de voz comunicando la sede principal con sucursales satélites.</li>
+                                    <li>Aprovechamiento seguro de la red WAN y túneles VPN Site-to-Site configurados previamente.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación total del coste de las comunicaciones telefónicas inter-oficinas.</li>
+                                    <li>Reducción directa del 80% en la facturación mensual global de voz de la empresa.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">VoIP PBX</span>
+                                <span class="result-badge">Panasonic IP</span>
+                                <span class="result-badge">VPN Routing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 11: Interconexión de sedes VPN -->
+                    <div class="project-card">
+                        <h3>🔗 Interconexión Segura de Sedes — VPN Site-to-Site</h3>
+                        <div class="project-meta">
+                            <span>📅 Mar 2020 - Jun 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Infraestructura informática totalmente aislada y fragmentada entre 3 oficinas comerciales nacionales, imposibilitando el acceso seguro a recursos.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Diseño, enrutamiento e implementación de túneles VPN Site-to-Site cifrados a nivel perimetral.</li>
+                                    <li>Unificación lógica del direccionamiento de red IP bajo estándares corporativos seguros.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Conexión estable 24/7 de las sucursales, eliminando islas de datos aislados.</li>
+                                    <li>Base de red segura para el despliegue del Directorio Activo centralizado y telefonía IP corporativa.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">VPN Site-to-Site</span>
+                                <span class="result-badge">Cifrado Ipsec</span>
+                                <span class="result-badge">Network Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 12: Sistema de control de accesos biométrico -->
+                    <div class="project-card">
+                        <h3>🆔 Implementación Sistema de Control de Accesos Biométrico</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2020 - May 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Vulnerabilidades de seguridad física e ineficiencia en el control de accesos de personal hacia zonas e infraestructuras críticas restringidas.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Instalación e integración lógica de terminales de autenticación con tecnología biométrica dactilar.</li>
+                                    <li>Desarrollo de un backend de sincronización automática para la consolidación de logs de auditoría en base de datos.</li>
+                                    <li>Configuración de alertas automatizadas en tiempo real ante intrusiones o fallas de seguridad.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Trazabilidad técnica e inalterable del 100% de los accesos físicos a las salas críticas de servidores.</li>
+                                    <li>Reducción radical de riesgos de seguridad interna mediante alertas proactivas automatizadas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Biometría</span>
+                                <span class="result-badge">Control Accesos</span>
+                                <span class="result-badge">Logs Audit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 13: Upgrade GP10 a GP2015 y SQL -->
+                    <div class="project-card">
+                        <h3>🔄 Upgrade General Microsoft Dynamics GP10 a GP2015 y SQL Server</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2020 - Abr 2020</span>
+                            <span>🏢 Inversiones Voltaire</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Plataforma ERP y base de datos obsoletas (SQL 2008) sufriendo degradación severa de rendimiento y falta de soporte.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Liderazgo técnico en la actualización y migración de esquemas desde SQL Server 2008 hacia SQL Server 2014.</li>
+                                    <li>Upgrade progresivo del core del ERP Microsoft Dynamics GP versión 10 hacia la suite GP 2015.</li>
+                                    <li>Ejecución de rigurosas pruebas de regresión, consistencia lógica y validación de flujos de datos contables.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Migración masiva culminada con éxito y con un índice verificado de cero pérdida de registros históricos.</li>
+                                    <li>Optimización drástica del rendimiento en consultas de inventario y generación de reportes financieros.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Dynamics GP 2015</span>
+                                <span class="result-badge">SQL Server 2014</span>
+                                <span class="result-badge">Data Upgrade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 14: Migración AD Microsoft a Open Source -->
+                    <div class="project-card">
+                        <h3>🐧 Migración de Infraestructura Active Directory Microsoft → Open Source</h3>
+                        <div class="project-meta">
+                            <span>📅 Jun 2017 - Nov 2017</span>
+                            <span>🏢 STELLIONET, C.A.</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Inviabilidad financiera debido a elevados costes de licenciamiento recurrente de Microsoft Windows Server en una infraestructura multi-sede.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Diseño integral de la migración del Directorio Activo propietario hacia servicios Open Source basados en Linux.</li>
+                                    <li>Configuración robusta de OpenLDAP para base de identidades y Samba4 para el control de dominio compatible.</li>
+                                    <li>Uso de Bind9 (DNS), Squid Proxy y automatización con Ansible para el despliegue equivalente de directrices de configuración.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Eliminación total del 100% de los costes asociados a licencias CAL y de sistema operativo Microsoft Server.</li>
+                                    <li>Mantenimiento íntegro de la autenticación unificada, perfiles de usuario y control centralizado de políticas de red.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">OpenLDAP / Samba4</span>
+                                <span class="result-badge">Linux Server</span>
+                                <span class="result-badge">Ansible Scripting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 15: Implementación Microsoft Dynamics CRM -->
+                    <div class="project-card">
+                        <h3>📈 Implementación Microsoft Dynamics CRM — Fuerza de Ventas</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2013 - Jun 2013</span>
+                            <span>🏢 GRUPO CUSTOM</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Falta de integración de los procesos comerciales, seguimiento de oportunidades y flujos de atención postventa con la administración central.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Instalación y configuración de la suite Microsoft Dynamics CRM integrada a nivel de base de datos relacional.</li>
+                                    <li>Personalización de entidades de negocio, automatización de embudos de ventas y flujos de soporte técnico.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Establecimiento de una visión unificada 360° del cliente, optimizando la coordinación entre departamentos comerciales y operativos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Dynamics CRM</span>
+                                <span class="result-badge">SQL Database</span>
+                                <span class="result-badge">Process Integration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 16: Implementación Microsoft Dynamics GP -->
+                    <div class="project-card">
+                        <h3>💼 Migración Tecnológica ERP Core hacia Microsoft Dynamics GP</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2013 - Jun 2013</span>
+                            <span>🏢 GRUPO CUSTOM</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Sistema ERP legacy DATAPRO obsoleto, sin capacidades de personalización ni escalabilidad frente al crecimiento corporativo.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Dirección y diseño de la migración integral de bases de datos relacionales desde DATAPRO hacia Microsoft Dynamics GP.</li>
+                                    <li>Configuración fina de módulos financieros, compras, inventario y control logístico avanzado.</li>
+                                    <li>Liderazgo en la capacitación técnica y funcional para la correcta adopción de 50 usuarios de la plataforma.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Modernización absoluta de la gestión administrativa central bajo una base robusta, auditada y de alta disponibilidad.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Dynamics GP Core</span>
+                                <span class="result-badge">Data Migration</span>
+                                <span class="result-badge">ERP Governance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 17: Aplicación web toma de contadores -->
+                    <div class="project-card">
+                        <h3>📊 Aplicación Web de Toma de Contadores con Integración API</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2012 - Dic 2012</span>
+                            <span>🏢 GRUPO CUSTOM</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Registro manual ineficiente de lecturas de contadores de impresión corporativos en hojas de cálculo distribuidas, generando demoras y errores de facturación.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Desarrollo y despliegue de una aplicación web centralizada dedicada a la recopilación automatizada de lecturas.</li>
+                                    <li>Diseño e integración de conexiones vía API REST para inyectar datos directamente en el CRM Vtiger corporativo.</li>
+                                    <li>Habilitación de algoritmos lógicos para la predicción y reposición proactiva de insumos en base al consumo real.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Erradicación de los errores humanos de recolección y automatización completa de los ciclos de facturación por excedentes.</li>
+                                    <li>Optimización drástica de la logística de almacén y entrega automatizada de consumibles.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">API REST / WebApp</span>
+                                <span class="result-badge">Vtiger CRM API</span>
+                                <span class="result-badge">Predictive Automation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyecto 18: Implementación Vtiger CRM -->
+                    <div class="project-card">
+                        <h3>🏢 Implantación Vtiger CRM e Infraestructura CIAC</h3>
+                        <div class="project-meta">
+                            <span>📅 Ene 2011 - Jul 2011</span>
+                            <span>🏢 GRUPO CUSTOM</span>
+                        </div>
+                        <div class="project-problem">
+                            <h4>⚠️ Problema</h4>
+                            <p>Ausencia de trazabilidad y descontrol operativo en los reportes de incidentes, reparaciones y solicitudes técnicas gestionadas de forma manual.</p>
+                        </div>
+                        <div class="project-grid">
+                            <div class="detail-item">
+                                <h4>✅ Acción</h4>
+                                <ul>
+                                    <li>Puesta en marcha e ingeniería tecnológica desde cero del Centro Integral de Atención al Cliente (CIAC).</li>
+                                    <li>Instalación, endurecimiento y parametrización de la plataforma Vtiger CRM sobre servidores Linux LAMP robustos.</li>
+                                    <li>Estructuración de flujos automáticos de asignación de casos basados en criticidad y colas de técnicos.</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <h4>📈 Resultado</h4>
+                                <ul>
+                                    <li>Digitalización integral de la operación operativa, garantizando tiempos de respuesta medibles e históricos inalterables.</li>
+                                    <li>Establecimiento del núcleo centralizado para auditorías de calidad de servicio técnico y postventa.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="project-results">
+                            <h4>🎯 Tecnologías</h4>
+                            <div class="result-badges">
+                                <span class="result-badge">Vtiger CRM Core</span>
+                                <span class="result-badge">Linux LAMP Server</span>
+                                <span class="result-badge">CIAC Infrastructure</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTÓN EXPANDIR/COLAPSAR -->
+                <div class="btn-wrapper">
+                    <button id="expand-projects-btn" class="expand-btn">
+                        <span>📂</span> Ver más proyectos (15 adicionales)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- METODOLOGÍA Y GOBERNANZA -->
+        <section id="method">
+            <div class="section-header">
+                <h2><span>📋</span> Metodología y Gobernanza TI</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <p>
+                Mi enfoque profesional integra la agilidad operativa con el rigor de la gestión de proyectos para garantizar infraestructuras resilientes y alineadas con los objetivos de negocio:
+            </p>
+
+            <div class="method-grid">
+                <div class="method-card">
+                    <h4>🔄 Marcos de Trabajo & Agilidad</h4>
+                    <p>Aplicación de metodologías ágiles (Scrum/Kanban) para gestión eficiente del backlog técnico y PM² Essentials para gobernanza estructurada de proyectos complejos.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>📊 Cultura Data-Driven</h4>
+                    <p>Especialista en elaboración de cuadros de mando en Grafana y Power BI para seguimiento de KPIs críticos, control de SLAs y reporte ejecutivo de avances, desviaciones y bloqueos.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>📚 Gestión del Conocimiento</h4>
+                    <p>Liderazgo en estandarización de activos mediante creación y mejora de políticas, procedimientos y documentación técnica del departamento IT.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>💬 Comunicación Estratégica</h4>
+                    <p>Experiencia transformando datos técnicos en insights accionables para la toma de decisiones y optimización de recursos.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>📈 Mejora Continua (Kaizen)</h4>
+                    <p>Enfoque proactivo orientado a resultados numéricos, detectando cuellos de botella y asegurando la culminación exitosa de cada fase del proyecto.</p>
+                </div>
+
+                <div class="method-card">
+                    <h4>🎯 Alineación con Negocio</h4>
+                    <p>Infraestructuras resilientes diseñadas para soportar objetivos de negocio y garantizar continuidad operativa sin fisuras.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMACIÓN Y CERTIFICACIONES -->
+        <section id="education">
+            <div class="section-header">
+                <h2><span>🎓</span> Formación y Certificaciones</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="education-list">
+                
+                <div class="education-item">
+                    <div class="education-icon">🎓</div>
+                    <div class="education-info">
+                        <h4>Ingeniero en Sistemas</h4>
+                        <p>Universidad Nacional Abierta | 2000 - 2006</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">📋</div>
+                    <div class="education-info">
+                        <h4>PM² Essentials - TecnoFor</h4>
+                        <p>Gestión de proyectos TI bajo metodología estructurada institucional europea</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🤖</div>
+                    <div class="education-info">
+                        <h4>Inteligencia Artificial Generativa - TecnoFor</h4>
+                        <p>Modelado y aplicación práctica de IA en optimización de entornos empresariales</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🚨</div>
+                    <div class="education-info">
+                        <h4>Apollo 13 (Gestión de Crisis ITIL) - TecnoFor</h4>
+                        <p>Simulación, mitigación y resolución compleja de crisis operativas críticas bajo presión</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🏆</div>
+                    <div class="education-info">
+                        <h4>Microsoft Certified Professional (MCP)</h4>
+                        <p>ID: 3357452 | Certificación Microsoft Oficial</p>
+                    </div>
+                </div>
+
+                <div class="education-item">
+                    <div class="education-icon">🌍</div>
+                    <div class="education-info">
+                        <h4>Idiomas</h4>
+                        <p>Español (Nativo) | Inglés — B2 (Intermedio Alto / Profesional)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contact">
+            <div class="section-header">
+                <h2><span>📬</span> Contacto</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-box">
+                    <h3>Información de Contacto</h3>
+                    <div class="skill-tags" style="flex-direction: column; align-items: flex-start;">
+                        <span class="tag">📧 hgcassidy@gmail.com</span>
+                        <span class="tag">📞 +34 606 927 948</span>
+                        <span class="tag">💼 <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" style="color: var(--accent); text-decoration: none;">linkedin.com/in/harvy-cassidy-8a69a296</a></span>
+                        <span class="tag">🐙 <a href="https://github.com/hgcassidy" style="color: var(--accent); text-decoration: none;">github.com/hgcassidy</a></span>
+                        <span class="tag">📍 Santa Cruz de Tenerife, España</span>
+                        <span class="tag">🚗 Permiso de Conducir: Clase B</span>
+                    </div>
+                </div>
+
+                <div class="skill-box">
+                    <h3>Disponibilidad</h3>
+                    <p>🟢 Abierto a oportunidades y proyectos estratégicos en:</p>
+                    <div class="skill-tags">
+                        <span class="tag featured">Administración de Sistemas</span>
+                        <span class="tag featured">Infraestructura IT / Híbrida</span>
+                        <span class="tag">Seguridad Perimetral & Redes</span>
+                        <span class="tag">Automatización / Scripting</span>
+                        <span class="tag">Gobernanza TI & SLAs</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER QUOTE -->
+            <div class="footer-quote">
+                <p>💡 "Transformo infraestructuras IT en sistemas altamente eficientes, seguros, resilientes y automatizados."</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Active navigation highlight on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // COLLAPSIBLE PROJECTS FUNCTIONALITY
+        const expandBtn = document.getElementById('expand-projects-btn');
+        const hiddenProjects = document.getElementById('hidden-projects');
+        let expanded = false;
+
+        if (expandBtn && hiddenProjects) {
+            expandBtn.addEventListener('click', function() {
+                if (!expanded) {
+                    hiddenProjects.classList.add('show');
+                    expandBtn.innerHTML = '<span>📁</span> Ver menos proyectos';
+                    expanded = true;
+                } else {
+                    hiddenProjects.classList.remove('show');
+                    expandBtn.innerHTML = '<span>📂</span> Ver más proyectos (15 adicionales)';
+                    expanded = false;
+                    
+                    // Smooth scroll back to projects section header after collapsing
+                    const projectsSection = document.getElementById('projects');
+                    if (projectsSection) {
+                        projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
