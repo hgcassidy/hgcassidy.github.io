@@ -229,15 +229,70 @@
             color: #f39c12;
         }
 
-        /* HEADER IMAGE */
-        .header-image {
+        /* HERO BANNER (AI background + crisp HTML text overlay) */
+        .hero-banner {
+            position: relative;
             width: 100%;
-            max-width: 100%;
-            height: auto;
+            aspect-ratio: 1584 / 396;      /* 4:1 — same ratio as the AI background */
             border-radius: 12px;
             margin-bottom: 40px;
             box-shadow: var(--shadow);
+            overflow: hidden;
             animation: fadeIn 0.8s ease-out;
+            /* Fallback navy if the image is missing; replace banner-bg.png with your Nano Banana file */
+            background-color: var(--bg2);
+            background-image:
+                linear-gradient(90deg, rgba(10,15,22,0.92) 0%, rgba(10,15,22,0.65) 40%, rgba(10,15,22,0.15) 70%, rgba(10,15,22,0) 100%),
+                url('../banner-bg.png');
+            background-size: cover;
+            background-position: center right;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding: 0 6%;
+            max-width: 62%;            /* keeps text in the clean left zone */
+        }
+
+        .hero-name {
+            font-size: clamp(28px, 4.4vw, 54px);
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 1px;
+            line-height: 1.02;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(13px, 1.7vw, 22px);
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+            margin: 6px 0 0 0;
+        }
+
+        .hero-tagline {
+            font-size: clamp(10px, 1.15vw, 14px);
+            color: var(--text-dim);
+            margin: 10px 0 0 0;
+            font-weight: 400;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 14px;
+            padding: 5px 12px;
+            border: 1px solid rgba(34, 211, 238, 0.4);
+            border-radius: 20px;
+            background: rgba(34, 211, 238, 0.12);
+            color: var(--accent);
+            font-size: clamp(9px, 1vw, 12px);
+            font-weight: 600;
+            white-space: nowrap;
         }
 
         /* MAIN CONTENT */
@@ -922,7 +977,7 @@
         }
 
         @media (max-width: 768px) {
-            .header-image { max-height: 200px; object-fit: cover; }
+            .hero-content { max-width: 78%; padding: 0 6%; }
             .metrics-grid { grid-template-columns: 1fr; }
             .skills-container { grid-template-columns: 1fr; }
             .project-grid { grid-template-columns: 1fr; }
@@ -944,7 +999,7 @@
             .sidebar { position: static; width: 100%; height: auto; }
             .main-content { margin-left: 0; width: 100%; }
             body { display: block; }
-            .nav-links, .btn-group, .header-image { display: none; }
+            .nav-links, .btn-group, .hero-banner { display: none; }
         }
     </style>
 </head>
@@ -984,7 +1039,7 @@
                 <a href="https://www.linkedin.com/in/harvy-cassidy-8a69a296/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                     <span>💼</span> LinkedIn
                 </a>
-                <a href="../CV Harvy Cassidy TECH.pdf" class="btn btn-secondary btn-cv" download>
+                <a href="../CV_Harvy_Cassidy_Systems_Administrator.pdf" class="btn btn-secondary btn-cv" download>
                     <span>📥</span> Download CV (PDF)
                 </a>
             </div>
@@ -992,8 +1047,15 @@
     </aside>
 
     <main class="main-content">
-        <!-- HEADER IMAGE -->
-        <img src="../header2.png" alt="Harvy Cassidy - Header" class="header-image">
+        <!-- HERO BANNER: AI-generated background (banner-bg.png) + crisp HTML text -->
+        <div class="hero-banner">
+            <div class="hero-content">
+                <h1 class="hero-name">Harvy Cassidy</h1>
+                <p class="hero-title">Systems Administrator</p>
+                <p class="hero-tagline">15+ years in hybrid infrastructure, automation &amp; security</p>
+                <span class="hero-chip">● 99.9% uptime SLA sustained</span>
+            </div>
+        </div>
 
         <!-- VALUE PROPOSITION -->
         <section id="about">
@@ -1031,7 +1093,7 @@
                     <p>Maximizing system performance and availability through proactive intelligent monitoring (Grafana/Checkmk) and fine-tuning resource allocation.</p>
                 </div>
                 <div class="skill-box">
-                    <h3>📋 IT Governance & Management</h3>
+                    <h3>📋 IT Governance & Methodology</h3>
                     <p>Architecture planning, complex deployments, and strict contingency control backed by KPIs, SLAs, and agile methodologies.</p>
                 </div>
             </div>
@@ -1048,7 +1110,7 @@
                 <div class="experience-header">
                     <div class="experience-title">
                         <h3>Systems Administrator N3</h3>
-                        <div class="experience-company">Inerza - Inetel (Canary Islands Brewing Company)</div>
+                        <div class="experience-company">Inerza-Inetel (Canary Islands Brewing Company)</div>
                         <div class="experience-location">📍 Tenerife, Spain</div>
                     </div>
                     <div class="experience-period">03/2022 - 10/2025</div>
@@ -1181,9 +1243,9 @@
                     <span class="metric-context">Redirected to strategic projects vs. reactive maintenance</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-val">700+</span>
-                    <span class="metric-label">Endpoints Migrated</span>
-                    <span class="metric-context">Controlled mass migration to Windows 11</span>
+                    <span class="metric-val">400</span>
+                    <span class="metric-label">Endpoints Migrated to Win 11</span>
+                    <span class="metric-context">Completed in production of a 700-endpoint rollout</span>
                 </div>
             </div>
 
@@ -1426,7 +1488,7 @@
                     <div class="project-card">
                         <h3>🖥️ Mass Windows 10 → Windows 11 Migration — 700 Endpoints</h3>
                         <div class="project-meta">
-                            <span>📅 Sep 2024 - Jun 2026</span>
+                            <span>📅 Sep 2024 - Oct 2025</span>
                             <span>🏢 INERZA, S.A.</span>
                         </div>
                         <div class="project-problem">
@@ -1445,7 +1507,7 @@
                             <div class="detail-item">
                                 <h4>📈 Result</h4>
                                 <ul>
-                                    <li>Successfully finalized the mass migration of 700 endpoints within the targeted timeframe.</li>
+                                    <li>Migrated and stabilized 400 of the 700 planned endpoints in production before role transition.</li>
                                     <li>Achieved zero operational downtime across the company's critical industrial and office sectors.</li>
                                     <li>Standardized and hardened corporate endpoint defenses.</li>
                                 </ul>
@@ -1633,7 +1695,7 @@
                                 <ul>
                                     <li>Analyzed bulk consumption data and data traffic habits using custom MariaDB queries.</li>
                                     <li>Identified anomalies, patterns, and lines with zero data utility over extended timelines.</li>
-                                    <li>Authored executive data findings to support contract negotiations and line cancelations.</li>
+                                    <li>Authored executive data findings to support contract negotiations and line cancellations.</li>
                                 </ul>
                             </div>
                             <div class="detail-item">
@@ -1745,7 +1807,7 @@
                             <div class="detail-item">
                                 <h4>✅ Action</h4>
                                 <ul>
-                                    <li>Designed and engineered encrypted perimetral Site-to-Site IPsec VPN connections.</li>
+                                    <li>Designed and engineered encrypted perimeter Site-to-Site IPsec VPN connections.</li>
                                     <li>Unified subnet configurations and global corporate IP assignment criteria safely.</li>
                                 </ul>
                             </div>
